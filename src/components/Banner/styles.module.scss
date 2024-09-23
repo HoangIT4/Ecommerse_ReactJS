@@ -1,0 +1,22 @@
+@import '@styles/mixins.module.scss';
+
+
+.container{
+    @include flex_box_custom(center,center, 20px);
+    position: relative;
+    background-image: url(../../assets/icons/images/Banner.png);
+    min-height: 506px;
+    background-repeat: no-repeat;
+    background-size:contain;
+    background-position:center;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    background-clip: border-box;
+    
+
+}
+
+
+

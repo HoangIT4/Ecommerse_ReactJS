@@ -1,0 +1,13 @@
+// file sinh ra nhằm mục đích viết những khối style chung nhằm tái sử dụng
+
+@mixin radius_common ($radius:10px){
+    border-radius: $radius;
+}
+
+@mixin flex_box_custom($x,$y,$gap: 10px){
+    display: flex;
+    justify-content: $x;
+    align-items: $y;
+    gap: $gap;
+
+}
