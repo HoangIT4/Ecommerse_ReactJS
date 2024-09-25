@@ -3,7 +3,7 @@ import reloadIcon from '@icons/svgs/reload-icon.svg';
 import wlIcon from '@icons/svgs/wish-list.svg';
 import cartIcon from '@icons/svgs/cart-icon.svg';
 import detailIcon from '@icons/svgs/detail-icon.svg';
-function ProductsItem({src,prevSrc,name,prive}) {
+function ProductsItem({src,prevSrc,name,price}) {
     const {boxImg,showImageWhenHover,showFncWhenHover,Icon,title,priceCls} = styles
 
     return (

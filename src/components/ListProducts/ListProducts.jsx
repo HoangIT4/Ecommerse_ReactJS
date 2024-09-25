@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import MainLayout from '@components/Layout/Layout';
 
 function ListProducts() {
-    const {container,containerItem,containerList,productsName} = styles
+    const {container,containerItem,containerList} = styles
     
     return ( 
         <MainLayout>
@@ -26,12 +26,8 @@ function ListProducts() {
                  
                     </div>
                     <div className={containerItem}>
-                        <ProductsItem/>
-    
+                        <ProductsItem/>   
                     </div>
-
-                    
-
                 </div>
                 
             </div>
