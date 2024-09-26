@@ -1,7 +1,7 @@
 const dataMenu = [
     {content: 'Our shop', href:'#'},
     {content: 'About us', href:'#'},
-    {content: 'Contacts', href:'#'},
+    {content: 'Contact us', href:'#'},
     {content: 'Search', href:'#'},
 
 ]

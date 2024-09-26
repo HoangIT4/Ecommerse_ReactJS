@@ -1,3 +1,24 @@
-container{
-    margin-top: 65px ;
+@import '@styles/mixins.module.scss';
+@import '@styles/variables.module.scss';
+
+.container{
+    @include flex_box_custom(space-between,center, 30px);
+    flex-direction: column;
+    margin-top: 60px;
+    background-color: $another-color;
+    color: white;
+    padding: 60px 0;
+    
+
+    .boxNav{
+        @include flex_box_custom(center,center,50px);
+        margin-top: 20px;
+        font-size: 17px;
+        margin-bottom: 20px;
+
+        :hover{
+            opacity: 0.5;
+            cursor: pointer;
+        }
+    }
 }

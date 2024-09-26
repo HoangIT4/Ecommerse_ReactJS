@@ -4,7 +4,7 @@ import Banner from '@components/Banner/Banner'
 import BannerBottom from '@components/BannerBottom/BannerBottom';
 import AdvanceHealing from '@components/AdvanceHealing/AdvanceHealing';
 import ListProducts from '@components/ListProducts/ListProducts';
-import Footer from '@components/Footer/Footer';
+import MyFooter from '@components/Footer/Footer';
 import {useEffect, useState} from 'react';
 import {getProducts} from '@/apis/productsService';
 
@@ -23,14 +23,11 @@ function HomePage() {
     return (  
         <>
                 <MyHeader/>
-                <Banner/>
-                <BannerBottom/>
+                <Banner/>             
                 <AdvanceHealing/>
                 <ListProducts data={listProducts}/>
-                <div style={{
-                    height: '300px'
-                }}></div>
-                <Footer/>
+                <BannerBottom/>
+                <MyFooter/>
         </>
     );
 }

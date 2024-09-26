@@ -2,16 +2,16 @@
 
 
 .container{
-    @include flex_box_custom(center,center, 20px);
+    @include flex_box_custom(center,center, 0px);
     position: relative;
     background-image: url(../../assets/icons/images/Banner.png);
     min-height: 506px;
     background-repeat: no-repeat;
-    background-size:cover;
+    background-size:contain;
     background-position:center;
     margin-top: 30px;
-    margin-left: 50px;
-    margin-right: 50px;
+    // margin-left: 50px;
+    // margin-right: 50px;
     height: auto;
     border-radius:10px ;
     background-clip: border-box;
