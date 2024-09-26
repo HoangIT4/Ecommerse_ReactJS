@@ -2,37 +2,24 @@ import ProductsItem from '../ProductsItem/ProductsItem';
 import styles from './styles.module.scss'
 import MainLayout from '@components/Layout/Layout';
 
-function ListProducts() {
+function ListProducts({data}) {
     const {container,containerItem,containerList} = styles
-    
     return ( 
         <MainLayout>
             <div className = {container}>
                 <div className={containerList}>
-                    <div className={containerItem}>
-                        <ProductsItem/>
-                        
-                    </div>
-                    <div className={containerItem}>
-                        <ProductsItem/>
-                        
-                    </div>
-                    <div className={containerItem}>
-                        <ProductsItem/>
-                       
-                    </div>
-                    <div className={containerItem}>
-                        <ProductsItem/>
-                 
-                    </div>
-                    <div className={containerItem}>
-                        <ProductsItem/>   
-                    </div>
+                        {data.map((item)=>(
+                            <div key = {item.id} className={containerItem}>
+                                 <ProductsItem 
+                                    src = {item.src}
+                                    preImg = {item.preImg}
+                                    name= {item.name}
+                                    price = {item.price}
+                                /> 
+                            </div>        
+                        ))}  
                 </div>
-                
             </div>
-            
-           
         </MainLayout>
      );
 }

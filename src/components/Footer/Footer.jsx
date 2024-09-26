@@ -1,6 +1,9 @@
+import styles from './styles.module.scss'
+
 function MyFooter() {
+    const {container} = styles
     return ( 
-        <div>
+        <div className ={container}>
            
         </div>
      );

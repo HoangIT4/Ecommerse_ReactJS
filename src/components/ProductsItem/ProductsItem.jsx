@@ -3,18 +3,18 @@ import reloadIcon from '@icons/svgs/reload-icon.svg';
 import wlIcon from '@icons/svgs/wish-list.svg';
 import cartIcon from '@icons/svgs/cart-icon.svg';
 import detailIcon from '@icons/svgs/detail-icon.svg';
-function ProductsItem({src,prevSrc,name,price}) {
+function ProductsItem({src,preImg,name,price}) {
     const {boxImg,showImageWhenHover,showFncWhenHover,Icon,title,priceCls} = styles
-
+    // "https://u-shop.vn/images/thumbs/0015582_nuoc-giat-omo-matic-cho-quan-ao-be-yeu-tui-36kg.png"
     return (
         <div>
             <div className={boxImg}>
-            <img src="https://u-shop.vn/images/thumbs/0015582_nuoc-giat-omo-matic-cho-quan-ao-be-yeu-tui-36kg.png" alt="" />
-            <img src="https://u-shop.vn/images/thumbs/0013616_nuoc-giat-omo-matic-cho-quan-ao-be-yeu-tui-36kg.png" 
-            alt=""
-            className={showImageWhenHover}/>
+                <img src = {src} alt="" />
+                <img src = {preImg}
+                alt=""
+                className={showImageWhenHover}/>
 
-            <div className={showFncWhenHover}>
+                <div className={showFncWhenHover}>
                 <div className={Icon}>
                     <img src={cartIcon}/>
                 </div>
@@ -32,8 +32,8 @@ function ProductsItem({src,prevSrc,name,price}) {
         
             
             </div>
-            <div className={title}>Nước giặt OMO Matic cho Quần áo Bé yêu túi 3.6kg</div>
-            <div className ={priceCls}>200.000 đ</div>
+            <div className={title}>{name}</div>
+            <div className ={priceCls}>{price}</div>
         </div>   
       );
 }
