@@ -1,0 +1,43 @@
+@import '@styles/mixins.module.scss';
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.container{
+    @include flex_box_custom(center,flex-start,25px);
+    position: relative;
+    
+    padding: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    transition: all 0.3s ease;
+
+    img{
+        width: 120px;
+    }
+    .boxClose{
+        position: absolute;
+        top:5px;
+        right:5px;
+        cursor: pointer;
+        transform: translate(38px);
+        transition: all 0.3s ease;
+    }
+    .content{
+        @include flex_box_custom(center,flex-start,15px);
+        flex-direction: column;
+        font-family: "Roboto Mono", monospace;
+        .title{
+            font-size: 16px;
+        }
+        .price{
+            font-size: 14px;
+        }
+    }
+    &:hover{
+        background-color: #e5e5e977;
+        .boxClose{
+            transform: translate(0);
+        }
+    }
+    
+}

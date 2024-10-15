@@ -3,13 +3,21 @@
 
 .container{
     @include flex_box_custom(space-between,center, 30px);
-    flex-direction: column;
+    flex-direction: row;
     margin-top: 60px;
+    width: calc(100% - 40px);
     background-color: $another-color;
     color: white;
-    padding: 60px 0;
+    padding: 20px 20px;
+    background-size: cover;
     
 
+    .menu{
+        cursor: pointer;
+        padding-top: 7px;
+        font-size: 18px;
+        color: white
+    }
     .boxNav{
         @include flex_box_custom(center,center,50px);
         margin-top: 20px;
@@ -21,4 +29,50 @@
             cursor: pointer;
         }
     }
+
+    .first_box{
+        @include flex_box_custom(center,flex-start,20px);
+        flex-direction: column;
+        padding: 0 20px;
+        flex: 0.4;
+
+      
+    }
+    .second_box{
+        @include flex_box_custom(space-between,center,20px);
+        flex-direction: column;
+        flex:  1.2; 
+        padding: 0 10px;
+
+        img{
+            
+            margin-top: 10px;
+            margin-bottom:20px
+        }
+
+        
+
+        .top_boxes {
+            @include flex_box_custom(space-between, center, 220px);
+            width: auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            flex-direction: row;
+
+            .support_box,
+            .policy_box {
+                flex: 1; 
+                padding: 0 30px;
+                
+            }
+            
+
+           
+            .img_box{
+                @include flex_box_custom(center,flex-start,0px);
+            }
+        }
+    }
+
+    
 }

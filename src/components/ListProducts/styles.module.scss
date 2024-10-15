@@ -24,6 +24,7 @@
     @include flex_box_custom(center ,center, 0px);
     height: 390px;
     border-radius: 10px; 
+    margin-bottom: 15px;
     transition: transform 500ms; 
     flex-direction: column;
     background-color: #fff;
@@ -31,9 +32,8 @@
     
 
     &:hover {
-        transform: translateY(-3px); 
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        border: 1px solid $seconddary_color;
+        outline: 1px solid $seconddary_color;
     }
 }
 

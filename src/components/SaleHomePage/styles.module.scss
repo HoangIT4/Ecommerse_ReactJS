@@ -1,0 +1,61 @@
+@import '@styles/mixins.module.scss';
+@import '@styles/variables.module.scss';
+
+
+.container{
+    @include flex_box_custom(center,center,20px);
+    position: relative;
+    background-size: cover;
+    flex-wrap: wrap;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 20px;
+    width: 100%;
+    overflow: hidden;
+
+    .slides {
+        @include flex_box_custom(center,center,20px);
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    img{
+        width: 50%;
+        object-fit: cover; 
+        border-radius: 10px;
+        
+    }
+    
+
+    .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 24px;
+        z-index: 1;
+        display: none;
+    }
+
+    .arrowLeft {
+        left: 10px; 
+    }
+
+    .arrowRight {
+        right: 10px;
+    }
+
+   
+    &:hover .arrow {
+        display: block; /* Hiện nút khi hover lên .container */
+    }
+
+    /* Thay đổi màu khi hover lên nút */
+    .arrow:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+}

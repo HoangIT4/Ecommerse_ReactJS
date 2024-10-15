@@ -1,0 +1,14 @@
+@import '@styles/mixins.module.scss';
+
+
+.container{
+    @include flex_box_custom(center,center,0px);
+    position: relative;
+    margin-top: 30px;
+    background-color: white;
+
+    .containerMenu{
+        @include flex_box_custom(center,center,0px);
+        flex-direction: row;
+    }
+}

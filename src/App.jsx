@@ -1,31 +1,28 @@
-import { Suspense, useState } from 'react'
+import React, { useState } from 'react';
+import {BrowserRouter} from 'react-router-dom';
+import Router from '@/routers/index';
+import { SideBarProvider } from '@/context/SidebarProvider';
+import Sidebar from './components/SideBar/SideBar';
+import MyHeader from './components/Header/Header';
+import MyFooter from './components/Footer/Footer';
+import MainLayout from './components/Layout/Layout';
+import '@styles/main.scss';
 
-import HomePage from '@components/HomePage/HomePage';
-
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import routers from '@/routers/routers';
 function App() {
-  
-  return (
-    <BrowserRouter>
-    <Suspense  fallback={<div>Loading....</div>}>
-      <Routes>  
-        {
-          routers.map((item,index)=>{
-            return (
-              <Route
-                path={item.path}
-                element={<item.component />} 
-                key={index}
-              />
-            )
-          })
-        }
-      </Routes>
+ 
+ 
+  return (   
+    <SideBarProvider>
+      <Sidebar/>
+      <BrowserRouter>
+        <MyHeader/>
+          <Router />
+        <MyFooter/>
+      </BrowserRouter>
+       
+    </SideBarProvider>
 
-    </Suspense>
-     
-    </BrowserRouter>
+   
   )
 }
 

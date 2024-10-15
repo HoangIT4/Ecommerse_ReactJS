@@ -4,19 +4,32 @@
 
 .container{
     @include flex_box_custom(center,center, 0px);
-    
+    width: 100%;
     background-color: $another-color;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); 
-    z-index: 1000;
+    left: 0;
+    right: 0;
+    z-index:1000;
     border-bottom: 3px solid rgba(0, 0, 0, 0.1); 
     
 }
+.topHeader{
+    top: 0;
+
+
+}
+.fixedHeader{
+    position: fixed;
+    top:-87px;
+    background-color: $another-color;
+    z-index:1000;
+    transform: translateY(100%);
+    // transition: transform 0.4s ease
+
+}
 .containerHeader{
-    @include flex_box_custom(center,center, 20px);
-    display: flex;
-    align-items:center;
-    justify-content: space-between;
-    width: 1280px; 
+    @include flex_box_custom(space-between,center, 20px);
+    width:1600px; 
     padding: 0 30px;
     box-sizing: border-box; 
     height: 83px;
@@ -24,7 +37,7 @@
 }
 
 .containerMenu{
-    @include flex_box_custom(center,center,70px)
+    @include flex_box_custom(center,center,90px)
 }
 
 .containerBox{
@@ -40,7 +53,13 @@
     cursor: pointer;
     padding-top: 7px;
     font-size: 18px;
-    color: white
+    color: white;
+
+    .link {
+        text-decoration: none; 
+        color: inherit; 
+
+    }
 }
 .menu::after{
     content: '';
@@ -60,3 +79,17 @@
     transform: scale(1);
 }
 
+// @media (max-width: 768px) {
+//     .containerMenu {
+//         display: none; // Ẩn menu trên màn hình nhỏ
+//     }
+
+//     .containerHeader {
+//         @include flex_box_custom(space-between, center, 10px); // Điều chỉnh padding
+//         height: 60px; // Giảm chiều cao của header
+//     }
+
+//     .containerBoxIcon {
+//         @include flex_box_custom(center, center, 20px); // Giảm khoảng cách giữa các icon
+//     }
+// }
