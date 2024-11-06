@@ -1,4 +1,5 @@
-@import '@styles/mixins.module.scss';
+@use '@styles/variables.module.scss' as*;
+@use'@styles/mixins.module.scss' as*;
 
 
 .container{
@@ -9,13 +10,40 @@
     background-repeat: no-repeat;
     background-size:contain;
     background-position:center;
-    margin-top: 30px;
-    // margin-left: 50px;
-    // margin-right: 50px;
+    margin-top: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
     height: auto;
     border-radius:10px ;
     background-clip: border-box;
     
+    @media (max-width: 768px) {
+        // Điều chỉnh min-height cho di động
+        min-height: 300px;
+        // Background kích thước bao phủ toàn bộ khu vực
+        background-size: cover;
+    
+        // Giảm margin để phù hợp với chiều rộng của màn hình
+        margin-left: 10px;
+        margin-right: 10px;
+        
+        // Điều chỉnh border-radius nếu cần
+        border-radius: 5px;
+    
+        // Thêm padding nếu cần cho khoảng cách bên trong
+        padding: 20px;
+      }
+    
+      // Media query cho màn hình rất nhỏ (nhỏ hơn 576px)
+      @media (max-width: 576px) {
+        min-height: 200px;
+        background-size: contain;
+        width: 100%;
+        margin-left: 5px;
+        margin-right: 5px;
+        padding: 0px;
+        border-radius: 3px;
+      }
 
 }
 

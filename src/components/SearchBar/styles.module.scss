@@ -1,0 +1,167 @@
+@use '@styles/mixins.module.scss' as*;
+
+:global {
+    .form-control:focus {
+      box-shadow: none;
+      z-index: 0;
+    }
+  }
+  
+  .searchContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    padding-top: 0;
+    width: 100%;
+
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .searchLabelContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+  }
+  
+  .inputGroup {
+    @include flex_box_custom(center,center,0px);
+    width: 100%;
+    max-width: 1000px;
+    height: 60px;
+    border-radius: 50px;
+    border: solid 1px black;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .inputGroupText {
+    background-color: white;
+    border: none;
+
+    padding: 0 15px;
+    font-size: 21px;
+
+  
+  }
+  
+  .formControl {
+    border: none;
+    width: 90%;
+    padding: 10px 20px;
+    box-shadow: none;
+    outline: none;
+    font-size: 21px;
+  }
+  
+  .clearButton {
+    @include flex_box_custom(center,center,6px);
+    border: 1px solid white;
+    font-size: 14px;
+    padding: 5px;
+    cursor: pointer;
+    &:hover {
+      background-color: #ffbeba;
+      border-radius: 100%;
+    }
+    &:active {
+      background-color: #d6392b !important;
+    }
+  }
+  
+
+  
+  .resultsContainer {
+    width: calc(96% - 40px);
+    max-width: 1000px;
+    position: absolute;
+    top: 89%; 
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-radius: 20px;
+    padding: 10px;
+    display: none;
+  }
+  
+  
+  .productItem {
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    transition: background-color 0.3s ease, box-shadow 0.1s ease;
+  
+    &:hover {
+      cursor: pointer;
+      background-color: #f0f0f0; // Nền xám nhẹ khi hover
+    }
+  
+    &:active {
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2); // Hiệu ứng nháy khi click
+      background-color: #e0e0e0; // Thay đổi nhẹ màu nền khi click
+    }
+  }
+  
+  .productImage {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 8px;
+  }
+  
+  .moreButton {
+    display: block;
+    margin: 10px auto; // Căn giữa nút
+    color: #007bff; // Màu chữ
+    font-weight: 500; // Đậm vừa
+    text-decoration: none; // Xóa gạch chân
+    font-size: 16px; // Cỡ chữ
+    background: transparent;
+    border: none;
+    transition: color 0.3s ease;
+    padding: 0;
+  
+    &:hover {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+  
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+  
+  .noResultsMessage {
+    text-align: center;
+    font-size: 16px;
+    color: #777;
+    padding: 10px;
+    font-style: italic;
+    margin-bottom: 0;
+  }
+  
+  .loadingContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px; 
+    width: 100%; 
+    background-color: transparent; 
+    z-index: 1; 
+  }
+  
+  .loadingContainer span {
+    margin-left: 10px;
+  }
+  

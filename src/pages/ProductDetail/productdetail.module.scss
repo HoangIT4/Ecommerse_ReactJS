@@ -1,0 +1,128 @@
+@use '@styles/variables.module.scss' as*;
+@use'@styles/mixins.module.scss' as*;
+
+
+.container{
+    @include flex_box_custom(center,center,200px);
+    position: relative;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: white;
+    height: 100%;
+
+    .containerBoxIcon{
+        @include flex_box_custom(center,center,20px)
+    }
+    .mainContent{
+        @include flex_box_custom(space-around,flex-start,50px);
+        flex-direction: row;
+
+        .leftContent{
+            
+            @include flex_box_custom(space-around,flex-start,0px);
+            flex-direction: column
+        }
+        .boxImg{
+            @include flex_box_custom(space-around,flex-start,0px);
+            margin-top: 40px;
+            flex-direction: row;
+            .anotherPicture{
+                margin-right: 5px;
+                flex-direction: column;
+            }
+           
+
+        }
+
+        .desciption{
+            width: 100%;
+            font-size: 18px;
+            object-fit: cover
+        }
+        .textContent{
+            width: 600px;
+            @include flex_box_custom(center,flex-start,10px);
+            flex-direction: column;
+            margin-top: 40px;
+            .nameProduct{
+                font-size: 25px;
+            }
+            .quantityBox{
+                padding-top: 10px;
+                width: 100%;
+                @include flex_box_custom(center,center,10px);
+                .quantityNumber{
+                    @include flex_box_custom(center,center,10px);
+                    width: 30%;
+                    height: 40px;
+                    border-radius: 20px;
+                    border: 1px solid
+                }
+                
+                
+            }
+        }
+    }
+    .circle{
+        @include flex_box_custom(center,center,10px);
+        border: 1px solid #e1e1e1;
+        padding:10px;
+        border-radius:100% 
+
+    }
+    .buttonStyle{
+        @include flex_box_custom(center,center,0px);
+        width: 100%; 
+        display: block;
+        text-align: center; 
+        background-color: #007bff;
+        color: white; 
+        border: none;
+        cursor: pointer;
+        padding: 10px 0 10px;
+        border-radius: 3px;
+        font-size: 16px; 
+    }
+
+
+
+    .headlineOR{
+        width: 100%;
+        @include flex_box_custom(center,center,0px);
+        // margin: 40px 0px 15px;
+        text-align: center;
+
+  
+
+    }
+
+    .headline{
+        height: 3px;
+        width:100%;
+        border-top: 1px solid #e1e1e1;
+        border-bottom: 1px solid #e1e1e1;
+
+
+    
+    }
+
+    .containerMiddleBox{
+        @include flex_box_custom(center,center,0px);
+        width:30%;
+        padding: 0px 30px;
+        line-height: 0;
+
+    
+    }
+
+    .des{ 
+        @include flex_box_custom(center,center,0px);
+        font-size: 15px;
+
+    
+    }
+
+
+}

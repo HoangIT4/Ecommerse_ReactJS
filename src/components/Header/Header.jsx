@@ -23,7 +23,7 @@ function MyHeader() {
     const [fixedPosition,setFixedPosition] = useState(false)
     const {setIsOpen,setType} = useContext(SideBarContext);
   
-
+    
     
    
     const handleOpenSidebar = (type) => {
@@ -72,10 +72,10 @@ function MyHeader() {
                 </div>
                 
                   <div className={containerBoxIcon} >
-                    <img width={26} height={26} src={userIcon} alt="userIcon"  onClick={() =>  handleOpenSidebar('user')}/>
-                    <img width={26} height={26} src={reloadIcon} alt="reloadIcon" onClick={()=> handleOpenSidebar('compare')}/>
-                    <img width={26} height={26} src={wlIcon} alt="wlIcon"  onClick={() => handleOpenSidebar('wishlist')}/>
-                    <img width={26} height={26} src={cartIcon} alt="cartIcon"  onClick={() => handleOpenSidebar('cart')}/>
+                    <img width={22} height={22} src={userIcon} alt="userIcon"  onClick={() =>  handleOpenSidebar('user')}/>
+                    <img width={22} height={22} src={reloadIcon} alt="reloadIcon" onClick={()=> handleOpenSidebar('compare')}/>
+                    <img width={22} height={22} src={wlIcon} alt="wlIcon"  onClick={() => handleOpenSidebar('wishlist')}/>
+                    <img width={22} height={22} src={cartIcon} alt="cartIcon"  onClick={() => handleOpenSidebar('cart')}/>
                 </div>
             </div>
            

@@ -4,7 +4,7 @@ import BannerBottom from '@components/BannerBottom/BannerBottom';
 import AdvanceHealing from '@components/AdvanceHealing/AdvanceHealing';
 import ListProducts from '@components/ListProducts/ListProducts';
 import SaleHealing from '@components/SaleHealing/SaleHealing';
-import MyFooter from '@components/Footer/Footer';
+;
 import {useEffect, useState} from 'react';
 import {getProducts} from '@/apis/productsService';
 import SaleHomePage from '../../components/SaleHomePage/SaleHomePage';
@@ -12,7 +12,7 @@ import SaleHomePage from '../../components/SaleHomePage/SaleHomePage';
 
 function HomePage() {
     const {container} = styles
-
+    
     const [listProducts,setListProducts] = useState([]);
     
     useEffect(() => {

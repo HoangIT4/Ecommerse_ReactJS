@@ -4,6 +4,7 @@ import '@styles/main.scss'
 import LoginForm from '@components/ContentSidebar/LoginForm/LoginForm'
 import CompareForm from '@components/ContentSidebar/CompareForm/CompareForm'
 import WishListForm from '@components/ContentSidebar/WishListForm/WishListForm'
+import CartForm from '@components/ContentSidebar/CartForm/CartForm'
 import styles from './styles.module.scss'
 import { CloseOutlined } from '@ant-design/icons';
 import { SideBarContext } from '@/context/SidebarProvider';
@@ -34,7 +35,7 @@ const Sidebar = () => {
         return <WishListForm/>;
 
       case 'cart':
-        return <div>Cart Component</div>;
+        return <CartForm/>;
 
       default:
         return null;
@@ -52,7 +53,7 @@ const Sidebar = () => {
   
         <Sider className={classNames(sidebar,{
           [slideSidebar] :isOpen
-        })} width={400} >
+        })} width={380} >
           {isOpen &&(
             <>
               <div className={closeIcon} onClick={handleToggle}>

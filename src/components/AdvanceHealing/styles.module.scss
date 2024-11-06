@@ -1,10 +1,18 @@
 
-@import '@styles/variables.module.scss';
-@import '@styles/mixins.module.scss';
+@use '@styles/variables.module.scss' as*;
+@use'@styles/mixins.module.scss' as*;
 
 .container{
     @include flex_box_custom(center,center,0px);
-    margin: 65px 0px 15px;
+    margin: 40px 0px 15px;
+    text-align: center;
+
+    @media (max-width: 768px) {
+        margin: 40px 0px 10px; // Giảm khoảng cách margin trên màn hình nhỏ
+    }
+    @media (max-width: 414px) {
+        margin: 20px 0px 10px; // Giảm khoảng cách margin trên màn hình nhỏ
+    }
 
 }
 
@@ -14,6 +22,11 @@
     border-top: 1px solid #e1e1e1;
     border-bottom: 1px solid #e1e1e1;
     margin-top: 30px;
+
+    @media (max-width: 768px) {
+        margin-top: 20px; // Giảm khoảng cách trên cùng của headline
+        width: 20%;
+    }
 }
 
 .containerMiddleBox{
@@ -21,15 +34,35 @@
     flex-direction: column;
     width:70%;
     padding: 0px 60px;
-    line-height: 0px;
+    line-height: 0;
+
+    @media (max-width: 768px) {
+        width: 90%; // Điều chỉnh độ rộng cho vừa với màn hình nhỏ
+        padding: 0px 20px; // Giảm padding để không quá lớn trên màn hình nhỏ
+        line-height: 1;
+    }
 }
 
 .des{
     font-size: 15px;
     color: $another_color;
+
+    @media (max-width: 768px) {
+        width: 90%; // Điều chỉnh độ rộng cho vừa với màn hình nhỏ
+        padding: 0px 20px; // Giảm padding để không quá lớn trên màn hình nhỏ\
+        font-size: 12px;
+    }
 }
 
 .title{
     font-size: 22px;
     color: $another_color;
+
+    @media (max-width: 768px) {
+        font-size: 22px; // Giảm kích thước font chữ cho màn hình nhỏ
+    }
+
+    @media (max-width: 576px) {
+        font-size: 16px; // Giảm thêm cho màn hình rất nhỏ
+    }
 }

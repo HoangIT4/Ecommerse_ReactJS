@@ -1,14 +1,20 @@
-@import '@styles/mixins.module.scss';
+@use '@styles/variables.module.scss' as*;
+@use'@styles/mixins.module.scss' as*;
 
 
 .container{
-    @include flex_box_custom(center,center,0px);
-    position: relative;
+    @include flex_box_custom(space-between,flex-start,0px);
+    border-radius: 10px;
     margin-top: 30px;
     background-color: white;
+    object-fit: cover;
+    height: auto;
 
-    .containerMenu{
-        @include flex_box_custom(center,center,0px);
-        flex-direction: row;
+    
+    .verticallLine {
+        width: 1px;
+        height: 142px;
+        background-color: #dddcdc;
+        
     }
 }

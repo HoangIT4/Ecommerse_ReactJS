@@ -1,0 +1,3 @@
+#Formik để quản lý tráng thái của form trong reactjs có tính năng xử lý submit form , xử lí dữ liệu đầu vào,...
+#Yup là một thư viện JavaScript cho phép bạn xây dựng lược đồ đối tượng cho dữ liệu của mình, 
+sau đó xác thực dữ liệu để đảm bảo dữ liệu khớp với lược đồ hoặc chuyển đổi dữ liệu để tuân thủ lược đồ.

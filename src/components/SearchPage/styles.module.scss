@@ -1,0 +1,27 @@
+@use '@styles/mixins.module.scss' as*;
+
+.container{
+    @include flex_box_custom(flex-start,center,0px);
+    flex-direction: column;
+    width: 100%;
+    background-color: white;
+    left: 0;
+    height: 100vh;
+    // position: fixed;
+    // z-index:2000;
+    // transform: translateX(100%);
+    // transition: all 0.3s ease;
+
+
+    
+    .overlay{
+        position: fixed;
+        top: 0;
+        left:0;
+        right:0;
+        bottom:0;
+        background-color: #2020204d;
+        z-index:1000;
+        transition: all 0.3s ease;
+    }
+}

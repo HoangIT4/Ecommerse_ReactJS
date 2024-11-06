@@ -1,110 +1,132 @@
-@import '@styles/mixins.module.scss';
-@import '@styles/variables.module.scss';
+@use '@styles/variables.module.scss' as*;
+@use'@styles/mixins.module.scss' as*;
 
-.boxImg{
-    @include flex_box_custom(space-between ,center, 10px);
-    width:280px;
-    height: 280px;
-    position: relative;
-    background-size: contain;
-    margin-bottom: 20px;
-    
+
+
+.containerItem{
+    @include flex_box_custom(center ,flex-start, 0px);
+    width: 240px;
+    height: 320px;
+    border-radius: 10px; 
+    margin-bottom: 15px;
+    transition: transform 500ms; 
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     
 
-    img{
+    &:hover {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        outline: 1px solid $seconddary_color;
+    }
+    .boxImg{
+
+        width:200px;
+        height: 200px;
+        margin :0 20px  ;
+        position: relative;
+        background-size: contain;
+        margin-bottom: 20px;
         
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        position: absolute; 
-        top: 0;
-        left: 0;
+        
+    
+        img{
+            // margin: 0 20px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute; 
+            top: 0;
+            left: 0;
+            
+        }
+        &:hover .showImageWhenHover{
+            opacity: 1;
+            transition: opacity 500ms;
+            
+        }
+    
+        .showImageWhenHover{
+            opacity: 0;
+            position: absolute;
+            top:0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    
+        
+        .showFncWhenHover{     
+            @include flex_box_custom(center,center,0px);
+            margin-right: 0px;
+            margin-bottom: 10px;
+            flex-direction: column;
+            flex: 1;
+            position: absolute;
+            opacity: 0;
+            bottom: 0;
+            right: 0;
+            background-color: $another-color;
+            border-radius: 5px;
+            
+        }
+        &:hover .showFncWhenHover{
+            opacity: 1;
+            right: 0px;
+            transition: opacity 300ms, right 500ms;
+        }
+    
+       
+        
+       
         
     }
-    &:hover .showImageWhenHover{
-        opacity: 1;
-        transition: opacity 500ms;
-        
-    }
-
-    .showImageWhenHover{
-        opacity: 0;
-        position: absolute;
-        top:0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    }
-
-    
-    .showFncWhenHover{     
+    .Icon{
+        position: relative;
         @include flex_box_custom(center,center,0px);
-        margin-right: 0px;
-        margin-bottom: 10px;
-        flex-direction: column;
-        flex: 1;
-        position: absolute;
-        opacity: 0;
+        width:34px;
+        height:34px;
         bottom: 0;
         right: 0;
-        background-color: $another-color;
-        border-radius: 5px;
         
+        
+        
+    
+       img{
+        width: 24px;
+        height: 24px;
+        position: static; 
+        margin: auto;
+       }
+       
+       &:hover{
+            background-color: #bebeb9;
+            transition: background-color 200ms;
+       }
+    
+    
+       
     }
-    &:hover .showFncWhenHover{
-        opacity: 1;
-        right: 10px;
-        transition: opacity 300ms, right 500ms;
+    
+    
+    .title{
+        font-size: 16px;
+        color: $four_color;
+        margin: 6px 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width:230px;
+        font-weight: 450;
+    
     }
-
-   
-    
-   
-    
-}
-.Icon{
-    position: relative;
-    @include flex_box_custom(center,center,0px);
-    width:34px;
-    height:34px;
-    bottom: 0;
-    right: 0;
-    
-    
-    
-
-   img{
-    width: 24px;
-    height: 24px;
-    position: static; 
-    margin: auto;
-   }
-   
-   &:hover{
-        background-color: #bebeb9;
-        transition: background-color 200ms;
-   }
-
-
-   
+    .priceCls{
+        
+        font-family: "Roboto", sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        color: $price_color;
+        margin: 6px 10px;   
+    }
 }
 
-
-.title{
-    font-size: 20px;
-    color: $four_color;
-    margin: 6px 10px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 270px;
-    font-weight: 450;
-
-   }
-.priceCls{
-    font-family: "Roboto", sans-serif;
-    font-weight: 700;
-    font-size: 25px;
-    color: $price_color;
-    margin: 6px 10px;   
-}

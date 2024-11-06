@@ -1,5 +1,5 @@
-@import "normalize.css";
-@import "./variables.module.scss";
-@import "./mixins.module.scss";
-@import "./global.module.scss";
+@use "normalize.css" as*;
+@use "./variables.module.scss" as*;
+@use "./mixins.module.scss" as*;
+@use "./global.module.scss" as*;
 // @import 'bootstrap/scss/bootstrap.scss';

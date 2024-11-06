@@ -1,18 +1,23 @@
 import styles from './styles.module.scss';
 import { dataMenu } from "./constants";
 import Menu from './Menu/Menu';
+import Hotdeal from './Hotdeal/Hotdeal';
+import Bestseller from './Bestseller/Bestseller';
+import PurchasedPro from './PurchasedProduct/PurchasedProduct';
+import ViewedPD from './ViewedProducts/ViewedProducts';
 
 function Category() {
-    const {containerMenu, container} = styles
+    const {container,verticallLine} = styles
     return ( 
-        <div className={container}>
-            <div className={containerMenu}>
-                {
-                    dataMenu.map((item) => {
-                        return <Menu key={item.id} content={item.content} href={item.href}/>
-                    })
-                }
-            </div>
+        <div className={container}>     
+                <Hotdeal/>
+                <div className={verticallLine}/>
+                <Bestseller/>   
+                <div className={verticallLine}/>  
+                <PurchasedPro/> 
+                <div className={verticallLine}/>
+                <ViewedPD/> 
+                
         </div>
 
      );

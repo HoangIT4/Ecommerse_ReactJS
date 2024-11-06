@@ -1,10 +1,10 @@
 
-@import '@styles/variables.module.scss';
-@import '@styles/mixins.module.scss';
+@use '@styles/variables.module.scss' as*;
+@use'@styles/mixins.module.scss' as*;
 
 .container{
     @include flex_box_custom(center,center,0px);
-    margin: 65px 0px 30px;
+    margin: 40px 0px 30px;
     
 
 }
@@ -14,6 +14,11 @@
     width:100%;
     border-top: 1px solid #e1e1e1;
     border-bottom: 1px solid #e1e1e1;
+
+    @media (max-width: 768px) {
+        margin-top: 20px; // Giảm khoảng cách trên cùng của headline
+        width: 20%;
+    }
 }
 
 .containerMiddleBox{
@@ -28,4 +33,13 @@
 .title{
     font-size: 22px;
     color: $another-color;
+
+    @media (max-width: 768px) {
+        font-size: 22px; // Giảm kích thước font chữ cho màn hình nhỏ
+    }
+
+    @media (max-width: 576px) {
+        font-size: 16px; // Giảm thêm cho màn hình rất nhỏ
+        
+    }
 }
