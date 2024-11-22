@@ -9,7 +9,7 @@ import ListProducts from '@components/ListProducts/ListProducts';
 import {getProducts} from '@/apis/productsService';
 import { getBrands } from '@/apis/brandsService';
 function OurShopPage() {
-    const {container} = styles
+    const {container,saleBanner} = styles
     const [listProducts,setListProducts] = useState([]);
     const [listBrands,setListBrands] = useState([])
     useEffect(() => {
@@ -21,14 +21,17 @@ function OurShopPage() {
         });
     }, []);
     return ( 
-        <MainLayout>
-            <div className={container}>
-                <SaleBanner/>
+        <div className={container}>
+            
+            <MainLayout>   
+                <div className={saleBanner}>
+                    <SaleBanner/>
+                </div>
                 <Trademark data={listBrands}/>
                 <Category/>
                 <ListProducts data={listProducts}/>
-            </div>
-        </MainLayout>
+            </MainLayout>
+        </div>
         
 
             

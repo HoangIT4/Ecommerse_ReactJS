@@ -1,12 +1,14 @@
 import axiosClient from './axiosClient';
 
-const register = async (body) =>{  // bất đồng bộ nên để là async
-   try {
-      return await axiosClient.post('/register', body);
-  } catch (error) {
-      // Ném lỗi để phần gọi hàm có thể xử lý
-      throw error;
-  } // tham số đầu là router muốn gọi, tham số thứ 2 là data trong method post
+const register= async (body) =>{  // bất đồng bộ nên để là async
+    return await axiosClient.post('/User/register', body);
 }
 
-export {register}
+const signIn = async (body) =>{
+    return await axiosClient.post('/User/login', body);
+}
+const getInfo = async (Id) =>{
+    return await axiosClient.get(`/User/${Id}`);
+}
+
+export {register, signIn, getInfo}  

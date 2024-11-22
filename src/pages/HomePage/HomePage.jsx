@@ -15,11 +15,11 @@ function HomePage() {
     
     const [listProducts,setListProducts] = useState([]);
     
-    useEffect(() => {
-        getProducts().then( res =>{
-            setListProducts(res)
-        });
-    }, []);
+    // useEffect(() => {
+    //     getProducts().then( res =>{
+    //         setListProducts(res)
+    //     });
+    // }, []);
     
     
     return (  

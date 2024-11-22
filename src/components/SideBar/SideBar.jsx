@@ -1,4 +1,4 @@
-import React, { useMemo,useEffect,useContext } from 'react';
+import React, { useEffect,useContext } from 'react';
 import { Layout} from 'antd';
 import '@styles/main.scss'
 import LoginForm from '@components/ContentSidebar/LoginForm/LoginForm'
@@ -8,6 +8,8 @@ import CartForm from '@components/ContentSidebar/CartForm/CartForm'
 import styles from './styles.module.scss'
 import { CloseOutlined } from '@ant-design/icons';
 import { SideBarContext } from '@/context/SidebarProvider';
+import { StoreContext } from '@/context/StoreProvider';
+import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 
 
@@ -16,8 +18,13 @@ const { Sider } = Layout;
 const Sidebar = () => {
   const {isOpen,setIsOpen ,type} = useContext(SideBarContext)
   const {container,overlay,sidebar,slideSidebar,closeIcon} = styles
-
+  const { userInfo } = useContext(StoreContext);
+  const navigate = useNavigate();
   
+
+
+
+
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
@@ -25,8 +32,8 @@ const Sidebar = () => {
   const renderComponent = () => {
     switch (type) {
       
-      case 'user':    
-        return <LoginForm/>
+      case "user":
+        return <LoginForm />;
 
       case 'compare':
         return <CompareForm/>

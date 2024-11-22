@@ -46,7 +46,19 @@
 }
 
 .containerBoxIcon{
-    @include flex_box_custom(center,center,25px)
+    @include flex_box_custom(center,center,25px);
+    height: 100%;
+
+    .user{
+        @include flex_box_custom(center,center,25px);
+        position: relative;
+        z-index: 9999;
+        height: 100%;
+
+
+        
+       
+    }
 }
 
 
@@ -79,6 +91,8 @@
     opacity: 1;
     transform: scale(1);
 }
+
+
 
 // @media (max-width: 768px) {
 //     .containerMenu {
