@@ -107,26 +107,44 @@
     
        
     }
-    
-    
-    .title{
-        font-size: 16px;
-        color: $four_color;
-        margin: 6px 10px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        width:230px;
-        font-weight: 450;
-    
-    }
-    .priceCls{
+    .ClickSpace{
+
+        .title{
+            font-size: 16px;
+            color: $four_color;
+            margin: 6px 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width:230px;
+            font-weight: 450;
+            
+           
         
-        font-family: "Roboto", sans-serif;
-        font-weight: 700;
-        font-size: 20px;
-        color: $price_color;
-        margin: 6px 10px;   
+        }
+        .priceCls{
+            
+            font-family: "Roboto", sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: $price_color;
+            margin: 6px 10px;   
+    
+        
+        }
+        &:hover {
+            cursor: pointer;
+            .title {
+                color: red; // Đổi màu của title khi hover vào ClickSpace
+            }
+    
+            .priceCls {
+                color: red;
+                // color: rgb(238, 194, 111); // Đổi màu của priceCls khi hover vào ClickSpace
+            }
+        }
     }
+    
+    
 }
 

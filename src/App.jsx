@@ -17,11 +17,12 @@ function App() {
  
  
   return (   
+
     <BrowserRouter>
       <StoreProvider>
         <ToastProvider>
           <SideBarProvider>
-            <Sidebar/>
+              <Sidebar/>
                 <MyHeader/>
                   <Router />
                 <MyFooter/>

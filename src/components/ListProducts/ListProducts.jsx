@@ -2,23 +2,119 @@ import ProductsItem from '../ProductsItem/ProductsItem';
 import styles from './styles.module.scss'
 import MainLayout from '@components/Layout/Layout';
 
-
+// const dataProduct = [
+//     {
+//         "id": "1",
+//         "name": "Kem ủ Tresemmé Salon Rebond 180ml",
+//         "price": "49.000 đ",
+//         "brand": "Tresemmé ",
+//         "stock": "8",
+//         "src": "https://u-shop.vn/images/thumbs/0015480_kem-u-tresemme-salon-rebond-180ml.png",
+//         "preImg": "https://u-shop.vn/images/thumbs/0013837_kem-u-tresemme-salon-rebond-180ml.png",
+//         "description": "Bí quyết của chuyên gia cho mái tóc được chăm sóc chuyên sâu ở salon luôn là thêm một bước kem ủ phục hồi. Thông qua việc ủ tóc, mái tóc bạn cũng sẽ nhận được những chất dinh dưỡng cần thiết, phục hồi và trở nên suôn mượt hơn. Tuy nhiên, thay vì phải ra salon thường xuyên mất nhiều thời gian và chi phí, TRESemmé đem lại cho bạn bí quyết dưỡng tóc từ các chuyên gia tạo mẫu tóc trên thế giới, cho mái tóc của bạn đẹp chuẩn salon ngay tại nhà."
+//       },
+//       {
+//         "id": "2",
+//         "name": "Hạt nêm Knorr Nấm hương Organic 380g",
+//         "price": "43.985 đ",
+//         "brand": "Knorr",
+//         "src": "https://u-shop.vn/images/thumbs/0016642_hat-nem-knorr-nam-huong-organic-380g.png",
+//         "preImg": "https://u-shop.vn/images/thumbs/0014544_hat-nem-knorr-nam-huong-organic-380g.png",
+//         "description": "Bí quyết của chuyên gia cho mái tóc được chăm sóc chuyên sâu ở salon luôn là thêm một bước kem ủ phục hồi. Thông qua việc ủ tóc, mái tóc bạn cũng sẽ nhận được những chất dinh dưỡng cần thiết, phục hồi và trở nên suôn mượt hơn. Tuy nhiên, thay vì phải ra salon thường xuyên mất nhiều thời gian và chi phí, TRESemmé đem lại cho bạn bí quyết dưỡng tóc từ các chuyên gia tạo mẫu tóc trên thế giới, cho mái tóc của bạn đẹp chuẩn salon ngay tại nhà."
+//       },
+//       {
+//         "id": "3",
+//         "name": "Kem Đánh Răng P/S Bảo Vệ 123 Trà xanh 240g",
+//         "price": "47.000 đ",
+//         "brand": " P/S ",
+//         "src": "https://u-shop.vn/images/thumbs/0016493_kem-danh-rang-ps-muoi-hong-hoa-cuc-180g_500.png",
+//         "preImg": "https://u-shop.vn/images/thumbs/0016493_kem-danh-rang-ps-muoi-hong-hoa-cuc-180g_500.png",
+//         "description": "- Chiết xuất tinh chất trà xanh - Được biết đến với công thức làm dịu các vấn đề răng miệng - Kết hợp với công thức P/S vượt trội"
+//       },
+//       {
+//         "id": "4",
+//         "name": "Nước giặt OMO Matic cho Quần áo Bé yêu túi 3.6kg",
+//         "price": "178.000 đ",
+//         "brand": " OMO",
+//         "src": "https://u-shop.vn/images/thumbs/0015582_nuoc-giat-omo-matic-cho-quan-ao-be-yeu-tui-36kg.png",
+//         "preImg": "https://u-shop.vn/images/thumbs/0013616_nuoc-giat-omo-matic-cho-quan-ao-be-yeu-tui-36kg.png",
+//         "description": "Nước giặt OMO Matic cho quần áo bé yêu, với công thức chuyên dụng cho bé đến từ Anh Quốc, chiết xuất tràm trà và nha đam."
+//       },
+//       {
+//         "id": "5",
+//         "name": "Dầu tắm gội Clear Men 3 Trong 1 Active Clean 630g",
+//         "price": "198.000 đ",
+//         "brand": "Clear",
+//         "src": "https://u-shop.vn/images/thumbs/0015488_dau-tam-goi-clear-men-3-trong-1-active-clean-630g.png",
+//         "preImg": "https://u-shop.vn/images/thumbs/0013455_dau-tam-goi-clear-men-3-trong-1-active-clean-630g.png",
+//         "description": "Tóc Sạch Gàu - Dưỡng ẩm da đầu -Sảng khoái toàn thân"
+//       },
+//       {
+//         "id": "6",
+//         "name": "Nước tẩy bồn cầu Vim Xanh biển 880ml",
+//         "price": "38.000 đ",
+//         "brand": "Vim",
+//         "src": "https://u-shop.vn/images/thumbs/0013883_nuoc-tay-bon-cau-vim-xanh-bien-880ml.png",
+//         "preImg": "https://u-shop.vn/images/thumbs/0013883_nuoc-tay-bon-cau-vim-xanh-bien-880ml.png",
+//         "description": [
+//           "- Diệt sạch vi khuẩn gây bệnh",
+//           "- Tấn công hóa học vào protein của tế bào vi khuẩn, phá hủy tế bào và diệt khuẩn hiệu quả",
+//           "- Có khả năng diệt cả virus (siêu vi)",
+//           "- Tẩy sạch các vết ban hữu cơ trong bồn cầu mà không làm mất độ bóng của gạch men",
+//           "- Không chứa acid, không ăn mòn các bề mặt gạch hay bồn cầu",
+//           "- Thiết kế dạng chai tiện lợi, dễ sử dụng"
+//         ]
+//       },
+//       {
+//         "id": "7",
+//         "name": "Dầu tắm gội Clear Men 3 Trong 1 Active Clean 630g",
+//         "price": "198.000 đ",
+//         "src": "https://u-shop.vn/images/thumbs/0015488_dau-tam-goi-clear-men-3-trong-1-active-clean-630g.png",
+//         "preImg": "https://u-shop.vn/images/thumbs/0013455_dau-tam-goi-clear-men-3-trong-1-active-clean-630g.png",
+//         "description": "Tóc Sạch Gàu - Dưỡng ẩm da đầu -Sảng khoái toàn thân"
+//       },
+//       {
+//         "id": "8",
+//         "name": "Dầu tắm gội Clear Men 3 Trong 1 Active Clean 630g",
+//         "price": "198.000 đ",
+//         "src": "https://u-shop.vn/images/thumbs/0015488_dau-tam-goi-clear-men-3-trong-1-active-clean-630g.png",
+//         "preImg": "https://u-shop.vn/images/thumbs/0013455_dau-tam-goi-clear-men-3-trong-1-active-clean-630g.png",
+//         "description": "Tóc Sạch Gàu - Dưỡng ẩm da đầu -Sảng khoái toàn thân"
+//       },
+//       {
+//         "id": "9",
+//         "name": "Dầu tắm gội Clear Men 3 Trong 1 Active Clean 630g",
+//         "price": "198.000 đ",
+//         "src": "https://u-shop.vn/images/thumbs/0015488_dau-tam-goi-clear-men-3-trong-1-active-clean-630g.png",
+//         "preImg": "https://u-shop.vn/images/thumbs/0013455_dau-tam-goi-clear-men-3-trong-1-active-clean-630g.png",
+//         "description": "Tóc Sạch Gàu - Dưỡng ẩm da đầu -Sảng khoái toàn thân"
+//       },
+//       {
+//         "id": "10",
+//         "name": "Dầu tắm gội Clear Men 3 Trong 1 Active Clean 630g",
+//         "price": "198.000 đ",
+//         "src": "https://u-shop.vn/images/thumbs/0015488_dau-tam-goi-clear-men-3-trong-1-active-clean-630g.png",
+//         "preImg": "https://u-shop.vn/images/thumbs/0013455_dau-tam-goi-clear-men-3-trong-1-active-clean-630g.png",
+//         "description": "Tóc Sạch Gàu - Dưỡng ẩm da đầu -Sảng khoái toàn thân"
+//       }
+// ]
 
 function ListProducts({data}) {
-
-    const {container,containerItem,containerList} = styles
+    const {container,containerItem,containerList, attention} = styles
     return ( 
         <MainLayout>
+            <div className = {attention}>Hãy click icon DETAIL khi đang trỏ vào sản phẩm hoặc bấm vào tên sản phẩm để xem chi tiết</div>
             <div className = {container}>
+                
                 <div className={containerList}>
                         {data.map((item)=>(
-                            <div key = {item.id} className={containerItem}>
+                            <div key = {item.productID} className={containerItem}>
                                  <ProductsItem 
-                                    id ={item.id}
+                                    productID ={item.productID}
                                     src = {item.src}
                                     preImg = {item.preImg}
                                     name= {item.name}
-                                    price = {item.price}
+                                    formattedPrice = {item.formattedPrice}
                                 /> 
                             </div>        
                         ))}  

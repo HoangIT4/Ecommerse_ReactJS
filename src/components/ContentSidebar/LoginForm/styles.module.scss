@@ -9,6 +9,7 @@
 .container{
     @include flex_box_custom(center,center,50px);
     background-position:fill; 
+ 
    
 }
 
@@ -18,6 +19,7 @@
     padding-top: 20px;
     padding-bottom: 20px;
     font-size: 20px;
+   
 
 
 }

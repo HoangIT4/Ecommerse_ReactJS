@@ -104,11 +104,11 @@
                                 alt="userIcon"
                                 onClick={() => handleOpenSidebar('user')}
                             />
-                            {showUserPopup &&  
+                            {showUserPopup &&  !fixedPosition && (
                                 // <div className={user_popup}>
                                     <UserPopup setShowUserPopup={setShowUserPopup}/>
                                 // </div>
-                            }
+                            )}
                         </div>
                         <div>
                             <img width={22} height={22} src={reloadIcon} style={{ cursor: 'pointer' }} alt="reloadIcon" onClick={()=> handleOpenSidebar('compare')}/>

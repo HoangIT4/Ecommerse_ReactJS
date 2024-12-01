@@ -51,6 +51,7 @@ function SaleBanner() {
                           style={{
                             maxWidth:'1280px',
                             width:'100%',
+                            height:'auto',
                             borderRadius:'10px',
                             display:'block',
                             justifyContent:'center',

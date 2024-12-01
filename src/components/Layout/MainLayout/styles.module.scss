@@ -1,0 +1,22 @@
+
+.wrapLayout{
+    display: flex;
+    justify-content: center;
+   
+    
+}
+
+.container{
+    width: 1280px;
+
+    @media (max-width: 768px) {
+        width: 80%; // Thu hẹp chiều rộng trên màn hình nhỏ
+        margin-top: 20px; // Giảm khoảng cách trên cùng của headline
+    }
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color:rgba(255, 248, 220, 0.733)
+}

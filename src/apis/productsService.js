@@ -1,12 +1,16 @@
 import axiosClient from './axiosClient';
 
 const getProducts = async () =>{
-    const res = await axiosClient.get('/products');
+    const res = await axiosClient.get('/Product/All');
     return res.data;
 }
-// const getProductById = async (id) => {
-//     const res = await axiosClient.get(`/products/${id}`);
-//     return res.data;
-//   };
-  
-export { getProducts};
+const getProductById = async (productId) => {
+    const res = await axiosClient.get(`/Product/${productId}`);
+   
+    
+    return res.data;
+   
+  };
+
+    
+export { getProducts,getProductById };

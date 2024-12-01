@@ -2,7 +2,7 @@ import axios from 'axios';
 import  Cookies  from 'js-cookie';
 const axiosClient = axios.create({
     // baseURL: 'http://localhost:3000',
-    baseURL: 'https://localhost:7060',
+    baseURL: 'https://localhost:7015',
     timeout:10000,
     headers: {
         'Content-Type': 'application/json',

@@ -1,7 +1,9 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import { routers, useRouters } from './allRouters';
-import UserPage from '@/pages/UserPage/UserPage';
+import UserPage from '@pages/UserPage/UserPage';
+
+
 
 
 const Router = () => {

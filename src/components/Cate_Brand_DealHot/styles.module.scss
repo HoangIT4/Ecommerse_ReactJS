@@ -1,0 +1,30 @@
+@use '@styles/variables.module.scss' as*;
+@use'@styles/mixins.module.scss' as*;
+
+.container{
+    @include flex_box_custom(space-around,center,0px);
+    flex-direction: row;
+    width: 100%;
+    color: $another_color;
+    .textDiv{
+        @include flex_box_custom(center,center,20px);
+        min-height: 30px;
+        margin:0;
+        padding:15px 0px 0px;
+
+        &:hover{
+            color: rgb(241, 169, 35);
+            cursor: pointer;
+        }
+
+        
+    }
+  
+}
+.menuStyle {
+    font-size: 16px;
+    color: $another_color;
+    cursor: pointer;
+
+  
+}

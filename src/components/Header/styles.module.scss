@@ -10,7 +10,7 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); 
     left: 0;
     right: 0;
-    z-index:1000;
+    z-index:999;
     border-bottom: 3px solid rgba(0, 0, 0, 0.1); 
     
 }
@@ -52,7 +52,7 @@
     .user{
         @include flex_box_custom(center,center,25px);
         position: relative;
-        z-index: 9999;
+        z-index: auto;
         height: 100%;
 
 

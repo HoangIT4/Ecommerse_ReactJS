@@ -1,6 +1,7 @@
 import styles from './shoppage.module.scss';
 import { useState,useEffect } from 'react';
 import React from 'react';
+import CategoriesBrands from '@components/Cate_Brand_DealHot/CategoriesBrands';
 import MainLayout from '@components/Layout/Layout';
 import SaleBanner from '@components/SaleBanner/SaleBanner';
 import Trademark from '@components/AllBrand/Trademark/Trademark';
@@ -14,20 +15,22 @@ function OurShopPage() {
     const [listBrands,setListBrands] = useState([])
     useEffect(() => {
         getProducts().then( res =>{
-            setListProducts(res)
+            setListProducts(res.data)
+         
+            
         });
-        getBrands().then(res => {
-            setListBrands(res)
-        });
+        // getBrands().then(res => {
+        //     setListBrands(res)
+        // });
     }, []);
     return ( 
-        <div className={container}>
-            
+        <div className={container}>         
             <MainLayout>   
+                <CategoriesBrands/>
                 <div className={saleBanner}>
                     <SaleBanner/>
                 </div>
-                <Trademark data={listBrands}/>
+                {/* <Trademark data={listBrands}/> */}
                 <Category/>
                 <ListProducts data={listProducts}/>
             </MainLayout>

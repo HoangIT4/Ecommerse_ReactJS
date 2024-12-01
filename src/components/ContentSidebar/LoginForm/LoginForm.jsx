@@ -84,23 +84,15 @@ const LoginForm =() => {
                 toast.success(res.data.message,{
                   autoClose:1000,
                 });
-
-
-
                 handleLogin()
-              
-               
-                
-             
+       
             } else {
                 toast.error('Invalid response from server');
             }
             setIsLoading(false);
             
           })
-          .catch((error) => {
-            console.log(error);
-            
+          .catch((error) => {        
             toast.error(error.response.data.message);
             setIsLoading(false);
           })
