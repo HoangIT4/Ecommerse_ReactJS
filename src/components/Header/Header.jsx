@@ -19,14 +19,14 @@
 
 
     function MyHeader() {
-        const {containerMenu, containerHeader, containerBox , containerBoxIcon, container,fixedHeader,topHeader,user,user_popup} = styles
+        const {containerMenu, containerHeader, containerBox , containerBoxIcon, container,fixedHeader,topHeader,user,boxCart,quantity} = styles
         const [showUserPopup, setShowUserPopup] = useState(false);
         const {scrollPosition} = useScrolling();
         const { userInfo } = useContext(StoreContext);
         const navigate = useNavigate();
         
         const [fixedPosition,setFixedPosition] = useState(false)
-        const {setIsOpen,setType} = useContext(SideBarContext);
+        const { setIsOpen, setType, listProductCart } = useContext(SideBarContext);
     
         
 
@@ -116,8 +116,14 @@
                         <div>
                             <img width={22} height={22} src={wlIcon} style={{ cursor: 'pointer' }} alt="wlIcon"  onClick={() => handleOpenSidebar('wishlist')}/>
                         </div>
-                        <div>
-                            <img width={22} height={22} src={cartIcon} style={{ cursor: 'pointer' }} alt="cartIcon"  onClick={() => handleOpenSidebar('cart')}/>
+                        <div className={boxCart}>
+                            <img width={22} height={22} src={cartIcon} style={{ cursor: 'pointer' }} alt="cartIcon" 
+                             onClick={() => handleOpenSidebar('cart')}
+                             />
+
+                            <div className={quantity}>
+                                {listProductCart.length}
+                            </div>
                         </div>
                         </div>
                 </div>

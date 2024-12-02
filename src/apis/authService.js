@@ -1,6 +1,6 @@
 import axiosClient from './axiosClient';
 
-const register= async (body) =>{  // bất đồng bộ nên để là async
+const register= async (body) =>{  
     return await axiosClient.post('/User/register', body);
 }
 

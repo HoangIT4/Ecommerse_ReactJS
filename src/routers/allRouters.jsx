@@ -8,7 +8,8 @@ const routers = [
     { path: '/search', component:lazy(() => import('@components/SearchPage/SearchPage'))},
     { path: '/cart', component:lazy(() => import('@pages/CartDetail/CartDetail'))},
     { path: '/productdetail/:productId', component:lazy(() => import('@pages/ProductDetail/ProductDetail'))},
-
+    { path: '/ourshop/categories', component:lazy(() => import('@pages/CategoriesPage/CategoriesPage'))},
+    { path: '/cartdetail', component:lazy(() => import('@pages/CartDetail/CartDetail'))},
 
 ]
 

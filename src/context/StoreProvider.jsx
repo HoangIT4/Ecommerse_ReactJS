@@ -9,7 +9,8 @@ export const StoreProvider = ({ children }) => {
 
   const[userInfo,setUserInfo] = useState(null)
   const navigate = useNavigate()
-  const UserID= Cookies.get('UserID');
+  const [UserID, setUserId] = useState(Cookies.get('UserID'));
+
 
   const handleLogOut = () =>{
     Cookies.remove('token');
@@ -20,15 +21,9 @@ export const StoreProvider = ({ children }) => {
 
   }
   useEffect(()=>{
-    if(UserID){
-     
-      getInfo(UserID).then((res)=>{
-        
+    if(UserID){ 
+      getInfo(UserID).then((res)=>{       
         setUserInfo(res.data);
-
-   
-        
-        
       }).catch((error) => {
         
       })
@@ -40,7 +35,7 @@ export const StoreProvider = ({ children }) => {
   
   
   return (
-    <StoreContext.Provider value={{userInfo, handleLogOut }} >
+    <StoreContext.Provider value={{userInfo, handleLogOut, setUserId }} >
       {children}
     </StoreContext.Provider>
   );

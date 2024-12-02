@@ -6,6 +6,7 @@ import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { ToastContext } from '@/context/ToastProvider';
+import { StoreContext } from '@/context/StoreProvider';
 import { SideBarContext } from '@/context/SidebarProvider';
 import userIcon from '@icons/svgs/user-icon.svg';
 import styles from './styles.module.scss'
@@ -15,12 +16,14 @@ import Cookies from 'js-cookie';
 
 
 const LoginForm =() => {
-    const { setIsOpen } = useContext(SideBarContext);
+    const { setIsOpen ,handleGetListProductCart} = useContext(SideBarContext);
     const [isRegister,setIsRegister] = useState(false)
     const [isLoading,setIsLoading] = useState(false)
     const navigate = useNavigate()
     const {toast} =useContext(ToastContext);
     const {loginIcon,title} = styles;
+    const { setUserId } = useContext(StoreContext);
+
     const formik = useFormik({
       initialValues: {
         email:'',
@@ -42,17 +45,14 @@ const LoginForm =() => {
       }),
 
       onSubmit: async (values) => {
-        const { email, password } = values;
-       
-        if (isLoading ) return
-       
-        if (isRegister) {
-          setIsLoading(true)
+        if (isLoading ) return;
 
+        const { email, password } = values;
+        setIsLoading(true)
+
+        if (isRegister) {
           await register({email,password})
             .then((res) => {
-              console.log(res);
-              
               toast.success(res.data.message)
               setIsLoading(false);
               
@@ -65,11 +65,10 @@ const LoginForm =() => {
         } 
 
 
-        const handleLogin = () =>{
-          setIsOpen(false)
-          navigate('/user/profile'); 
+        // const handleLogin = () =>{
+         
 
-        }
+        // }
 
         if(!isRegister){
 
@@ -77,24 +76,20 @@ const LoginForm =() => {
           await signIn({ email, password })
           .then((res) => {
             const { id, token } = res.data; 
-
-            if (id && token) {
-                Cookies.set('UserID', id);
-                Cookies.set('token', token); 
-                toast.success(res.data.message,{
-                  autoClose:1000,
-                });
-                handleLogin()
-       
-            } else {
-                toast.error('Invalid response from server');
-            }
-            setIsLoading(false);
+            setUserId(id);
+            Cookies.set('token', token); 
+            Cookies.set('UserID', id);
+            toast.success(res.data.message,{ autoClose:1000 });
+            setIsOpen(false)
+            navigate('/user/profile'); 
+            setIsLoading(false); 
+            window.location.reload()
+            handleGetListProductCart(id,'cart')
             
           })
           .catch((error) => {        
-            toast.error(error.response.data.message);
             setIsLoading(false);
+            toast.error(error.response.data.message);
           })
         }
       },
@@ -107,6 +102,7 @@ const LoginForm =() => {
   
   const handleToggle = () =>{
     setIsRegister(!isRegister); 
+    formik.resetForm();
     if (isRegister) {
       formik.setFieldValue('cfmpassword', ''); 
     }}

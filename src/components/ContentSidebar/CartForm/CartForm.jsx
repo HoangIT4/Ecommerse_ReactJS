@@ -2,9 +2,30 @@ import cartIcon from '@icons/svgs/cart-icon.svg';
 import styles from './styles.module.scss'
 import SidebarProduct from '@components/SidebarProduct/SidebarProduct';
 import { Flex,Button } from 'antd';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import LoadingTextCommon from '@components/LoadingTextCommon/LoadingTextCommon';
+import { SideBarContext } from '@/context/SidebarProvider';
 
 function CartForm() {
-    const {container,CartIcon,title,boxContent,subtotal} = styles
+    const {container,CartIcon,title,boxContent,subtotal, containerListProductCart, overlayLoading} = styles
+    const { listProductCart, isLoading, setIsOpen } =useContext(SideBarContext);
+    const navigate = useNavigate()
+
+    const handleNavigateToShop = () => {
+        navigate('/ourshop');
+        setIsOpen(false);
+    };
+
+    const subTotal = listProductCart.reduce((acc, item) => {
+        return acc + item.total;
+    }, 0);
+
+    const handleNavigateToCart = () => {
+        navigate('/cartdetail');
+        setIsOpen(false);
+    };
+ 
     return ( 
         <div className={container}>
             <div className={boxContent}>
@@ -12,10 +33,29 @@ function CartForm() {
                     <img width={36} height={36} src={cartIcon} style={{ filter: 'brightness(0) invert(0)' }} alt="cartIcon"  />
                     <p className={title}>CART</p>
                 </div>
-                <SidebarProduct/>
+                <div>
+                    {isLoading ? (
+                        <LoadingTextCommon />
+                    ) : (
+                        listProductCart.map((item,cartID) =>{ 
+                            return (
+                                <SidebarProduct 
+                                    key={cartID}
+                                    src={item.preImg}
+                                    nameProduct={item.name}
+                                    quantity={item.quantity}
+                                    priceProduct={item.formattedPrice}       
+                                    cartID ={item.cartID} 
+                                    userID = {item.userID}         
+                                />
+                            );
+                        })
+                    )}
+                </div>   
             </div>
 
             <div>
+                
                 <div className={subtotal}>
                         <div>SUBTOTAL:</div>
                         <div>$199.99</div>
@@ -29,14 +69,23 @@ function CartForm() {
                         justifyContent: 'center', 
                         alignItems: 'center',    
                         maxWidth: '600px',
-                        backgroundPosition: 'center' 
+                        backgroundPosition: 'center',
+                        marginBottom:'20px'
                     }}
                 >
-                    <Button type="primary" block style={{ width: '360px',height:'40px',fontSize:'20px',fontFamily:'"Roboto Mono", monospace',backgroundPositionL:'center'}}>
+                    <Button type="primary" 
+                        block 
+                        style={{ width: '360px',height:'40px',fontSize:'20px',fontFamily:'"Roboto Mono", monospace',backgroundPositionL:'center'}}
+                        onClick={handleNavigateToCart}
+                    >
                         View Cart
                     </Button>
-                    <Button block style={{ width: '360px',height:'40px',fontSize:'20px',fontFamily:'"Roboto Mono", monospace',backgroundPositionL:'center'}}>
-                        Check Out
+                    <Button
+                        block 
+                        style={{ width: '360px',height:'40px',fontSize:'20px',fontFamily:'"Roboto Mono", monospace',backgroundPositionL:'center'}}
+                        onClick={handleNavigateToShop}
+                    >
+                        Continue shopping
                     </Button>
                 </Flex>
             </div>

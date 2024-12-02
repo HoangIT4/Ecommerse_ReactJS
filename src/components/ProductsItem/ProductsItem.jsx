@@ -16,7 +16,7 @@ function ProductsItem({productID,src,preImg,name,formattedPrice}) {
     const {containerItem,boxImg,showImageWhenHover,showFncWhenHover,Icon,title,priceCls,ClickSpace} = styles
     const navigate = useNavigate();
     const UserID = Cookies.get('UserID')
-    const {setIsOpen, setType,handleGetListProductCart} = useContext(SideBarContext);
+    const {setIsOpen, setType, handleGetListProductCart} = useContext(SideBarContext);
     const { toast } = useContext(ToastContext);
 
 
@@ -30,7 +30,7 @@ function ProductsItem({productID,src,preImg,name,formattedPrice}) {
     const handleAddToCart = () =>{
         if(!UserID){
             setIsOpen(true);
-            setType("login");
+            setType("user");
             toast.warning('Please login to add to cart')
 
             return; 
@@ -45,18 +45,16 @@ function ProductsItem({productID,src,preImg,name,formattedPrice}) {
             productPrice:formattedPrice
     
         }
-        console.log(data);
 
 
         addProductToCart(data)  
-            .then((res) => {        
+            .then((res) => {       
                 setIsOpen(true);
                 setType('cart');
-                toast.success(res.message)
+                toast.success(res.message,{ autoClose:1000 })
                 handleGetListProductCart(UserID, 'cart');
             })
             .catch((error) => {
-                // toast.error('Add Product to cart failed!');
                 toast.error(error.message)
             });
     }

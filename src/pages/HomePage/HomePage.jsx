@@ -11,21 +11,24 @@ import SaleHomePage from '../../components/SaleHomePage/SaleHomePage';
 
 
 function HomePage() {
-    const {container} = styles
+    const {container,attention} = styles
     
     const [listProducts,setListProducts] = useState([]);
     
-    // useEffect(() => {
-    //     getProducts().then( res =>{
-    //         setListProducts(res)
-    //     });
-    // }, []);
-    
+    useEffect(() => {
+        getProducts().then( res =>{
+            setListProducts(res.data)
+         
+            
+        });
+
+    }, []);
     
     return (  
         <div className={container}>
             <Banner/>    
             <AdvanceHealing/>
+            <div className = {attention}>Hãy click icon DETAIL khi đang trỏ vào sản phẩm hoặc bấm vào tên sản phẩm để xem chi tiết</div>
             <ListProducts data={listProducts}/>
             <BannerBottom/>
             <SaleHealing/>

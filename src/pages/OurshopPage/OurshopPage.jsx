@@ -9,37 +9,41 @@ import Category from '@components/Category/Category';
 import ListProducts from '@components/ListProducts/ListProducts';
 import {getProducts} from '@/apis/productsService';
 import { getBrands } from '@/apis/brandsService';
+import {getCategories} from '@/apis/categoryService'
 function OurShopPage() {
     const {container,saleBanner} = styles
     const [listProducts,setListProducts] = useState([]);
     const [listBrands,setListBrands] = useState([])
+    const [listCategories,setListCategories] = useState([])
+  
+
     useEffect(() => {
         getProducts().then( res =>{
-            setListProducts(res.data)
-         
-            
+            setListProducts(res.data)      
         });
-        // getBrands().then(res => {
-        //     setListBrands(res)
-        // });
+        getBrands()
+        .then(res => {
+          setListBrands(res.data)
+        });
+      getCategories()
+        .then(res => {
+          setListCategories(res.data)
+        })
     }, []);
+    
     return ( 
         <div className={container}>         
             <MainLayout>   
-                <CategoriesBrands/>
+            <CategoriesBrands brands={listBrands} categories={listCategories} />
                 <div className={saleBanner}>
                     <SaleBanner/>
                 </div>
                 {/* <Trademark data={listBrands}/> */}
-                <Category/>
+                <Category />
                 <ListProducts data={listProducts}/>
             </MainLayout>
         </div>
-        
 
-            
-
-      
     );
 }
 

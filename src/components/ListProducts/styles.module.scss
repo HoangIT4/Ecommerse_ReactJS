@@ -9,12 +9,7 @@
     
 }
 
-.attention{
-    @include flex_box_custom(center,center, 0px);
-    padding-top: 30px;
-    color: rgb(214, 37, 37);
-    font-size: 18px
-}
+
 
 .containerList{
     @include flex_box_custom(flex-start,center, 10px);

@@ -100,10 +100,10 @@ import MainLayout from '@components/Layout/Layout';
 // ]
 
 function ListProducts({data}) {
-    const {container,containerItem,containerList, attention} = styles
+    const {container,containerItem,containerList} = styles
     return ( 
         <MainLayout>
-            <div className = {attention}>Hãy click icon DETAIL khi đang trỏ vào sản phẩm hoặc bấm vào tên sản phẩm để xem chi tiết</div>
+            
             <div className = {container}>
                 
                 <div className={containerList}>

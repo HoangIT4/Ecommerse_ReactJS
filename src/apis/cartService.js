@@ -7,8 +7,12 @@ const addProductToCart = async (data) =>{
 const getCart = async (UserID) =>{
     const res = await axiosClient.get(`/Cart/${UserID}`);
     return res.data;
+   
+}
+const deleteItem = async (body) =>{
 
-    
+    const res = await axiosClient.delete('Cart/DeleteCart-Item',{data:body})
+    return res.data
 }
   
-export { addProductToCart,getCart };
+export { addProductToCart, getCart ,deleteItem};
