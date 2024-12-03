@@ -65,10 +65,7 @@ const LoginForm =() => {
         } 
 
 
-        // const handleLogin = () =>{
-         
-
-        // }
+        
 
         if(!isRegister){
 

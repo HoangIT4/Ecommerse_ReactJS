@@ -21,9 +21,9 @@ function ProductsItem({productID,src,preImg,name,formattedPrice}) {
 
 
 
-    const handleProductClick = () => {
-        // navigate(`/productdetail/${productID}`);
-        console.log(productID);
+    const handleProductClick = (data) => {
+        console.log(data);
+        navigate(`/productdetail/${productID}`);
         
     };
 

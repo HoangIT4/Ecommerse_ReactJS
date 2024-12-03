@@ -1,7 +1,8 @@
 import { useState,useEffect } from 'react';
 import { Col, Row } from 'antd';
 import { useParams } from 'react-router-dom';
-import {getProductById } from '../../apis/productsService';
+import { getProductById } from '@/apis/productsService';
+import { useNavigate } from 'react-router-dom';
 import styles from './productdetail.module.scss'
 import reloadIcon from '@icons/svgs/reload-icon.svg';
 import wlIcon from '@icons/svgs/wish-list.svg';
@@ -9,9 +10,11 @@ import MainLayout from '@components/Layout/Layout';
 import { FormControl } from 'react-bootstrap';
 
 
-function  ProductDetail({data}) {
-    const { productId} = useParams();
 
+function  ProductDetail() {
+    const { productId} = useParams();
+    const navigate = useNavigate();
+ 
 
     const {
         leftContent,container,
@@ -30,7 +33,7 @@ function  ProductDetail({data}) {
     const [productData, setProductData] = useState(null);
 
     const handleIncrease = () => {
-        if (quantity < productData.stock) { // Kiểm tra xem số lượng có nhỏ hơn tồn kho không
+        if (quantity < productData.stock) {
             setQuantity(quantity + 1);
         }
     }
@@ -40,22 +43,21 @@ function  ProductDetail({data}) {
       }
     };
 
+   
     useEffect(() => {
-        const fetchProductData = async () => {
-          // Giả sử hàm getProducts là một hàm bất đồng bộ lấy danh sách sản phẩm
-          const selectedProduct = await getProductById(productId);
-          
-          
-          if (selectedProduct) {
-            setProductData(selectedProduct);
-          } else {
-            console.error("Product not found");
-          }
+        const fetchProduct = async () => {
+            try {
+                const data = await getProductById(productId);
+                setProductData(data);
+            } catch (error) {
+                console.error('Failed to fetch product:', error);
+            }
         };
-        fetchProductData();
-      }, [productId]);
+
+        fetchProduct();
+    }, [productId]);
     
-      if (!data) return <p>Loading...</p>;
+      if (!productData) return <p>Loading...</p>;
    
 
     return ( 
@@ -82,10 +84,10 @@ function  ProductDetail({data}) {
                             <div className={nameProduct} style={{marginBottom:'15px'}} >
                             {productData.name}
                             </div>  
-                            <div style={{fontSize:'18PX',color:'red'}} >{data.price}</div>    
-                            <div style={{fontSize:'18PX'}}>Brand: {data.brand}</div>      
+                            <div style={{fontSize:'18PX',color:'red'}} >{productData.price} đ</div>    
+                            <div style={{fontSize:'18PX'}}>Brand: {productData.brands.brandName}</div>      
                             <div className={desciption}>
-                                Description: {data.description}
+                                Description: {productData.description}
                             </div>
                         
                             <div className={quantityBox}>
@@ -130,7 +132,7 @@ function  ProductDetail({data}) {
                                 </div>
                                 <button type="button" className={buttonStyle}>ADD TO CART</button>
                             </div>
-                            <div>Stock: {data.stock}</div>
+                            <div>Stock: {productData.stock}</div>
                             <div className={headlineOR}>
                                 <div className={headline}></div>
                                 <div className={containerMiddleBox}>
@@ -167,7 +169,7 @@ function  ProductDetail({data}) {
                             <div style={{padding:'10px',fontFamily:'"Roboto Mono", monospace',fontSize:'18px'}}>Xuất xứ :</div>
                         </Col>
                         <Col span={12}>
-                            <div style={{padding:'10px',fontFamily:'"Roboto Mono", monospace',fontSize:'18px'}}>Thực Phẩm</div>
+                            <div style={{padding:'10px',fontFamily:'"Roboto Mono", monospace',fontSize:'18px'}}>{productData.categories?.[0]?.categoryName}</div>
                             <div style={{padding:'10px',fontFamily:'"Roboto Mono", monospace',fontSize:'18px'}}>380g</div>
                             <div style={{padding:'10px',fontFamily:'"Roboto Mono", monospace',fontSize:'18px'}}>Việt Nam</div>
                         </Col>

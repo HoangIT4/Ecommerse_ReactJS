@@ -9,9 +9,10 @@
     
 
     .content_space{
+       
         width: 100%;
         background-color: #fff;
-        padding: 20px;
+        padding: 20px 0;
       
     }
    
@@ -243,7 +244,7 @@
     .boxEmptyCart {
         @include flex_box_custom(center, center, 20px);
         flex-direction: column;
-    
+        // height:400px;
         width: 100%;
         font-size: 14px;
         color: $thr_color;

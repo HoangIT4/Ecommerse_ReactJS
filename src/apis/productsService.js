@@ -5,11 +5,11 @@ const getProducts = async () =>{
     return res.data;
 }
 const getProductById = async (productId) => {
-    const res = await axiosClient.get(`/Product/${productId}`);
-   
-    
-    return res.data;
-   
+  
+  const res = await axiosClient.get(`/Product/${productId}`);
+  console.log(res);
+  return res.data;
+  
   };
 
     

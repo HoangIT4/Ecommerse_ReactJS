@@ -23,7 +23,7 @@ const CartSummary = () => {
         imgMethods,
         textSecure
     } = styles;
-    // const { listProductCart, isLoading } = useContext(SideBarContext);
+    const { listProductCart, isLoading } = useContext(SideBarContext);
 
     const srcMethods = [
         'https://xstore.8theme.com/elementor2/marseille04/wp-content/themes/xstore/images/woocommerce/payment-icons/visa.jpeg',
@@ -33,30 +33,30 @@ const CartSummary = () => {
         // 'https://xstore.8theme.com/elementor2/marseille04/wp-content/themes/xstore/images/woocommerce/payment-icons/maestro.jpeg',
     ];
 
-    // const total = listProductCart.reduce((acc, item) => {
-    //     return acc + item.total;
-    // }, 0);
+    const Total = listProductCart.reduce((acc, item) => {
+        return acc + item.total;
+    },0).toFixed(3);;
 
     return (
         <div className={containerRight}>
             <div className={containerSummary}>
                 <div className={title}>CART TOTALS</div>
-
+ 
                 <div className={cls(boxTotal, subTotal)}>
                     <div>Subtotal</div>
-                    <div className={price}>ĐỒng</div>
+                    <div className={price}>{Total}đ</div>
                 </div>
 
                 <div className={cls(boxTotal, totals)}>
                     <div>TOTAL</div>
-                    <div>Tiền</div>
+                    <div>{Total}đ</div>
                 </div>
 
                 <Button content={'PROCEED TO CHECKOUT'} />
                 <div className={space} />
                 <Button content={'CONTINUE SHOPPING'} isPriamry={false} />
 
-                {/* {isLoading && <LoadingCart />} */}
+                {isLoading && <LoadingCart />}
             </div>
 
             <div className={containerMethods}>
