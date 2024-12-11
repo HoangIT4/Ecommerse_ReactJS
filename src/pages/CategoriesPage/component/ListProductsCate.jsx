@@ -1,19 +1,18 @@
-import ProductsItem from '../ProductsItem/ProductsItem';
-import styles from './styles.module.scss'
-import MainLayout from '@components/Layout/Layout';
+import ProductsItem from '@components/ProductsItem/ProductsItem';
+import styles from '../styles.module.scss'
+// import MainLayout from '@components/Layout/Layout';
 
 
 
-function ListProducts({data}) {
-    const {container,containerItem,containerList} = styles
+function ListProductsCate({data}) {
+    const {containerCate,containerItemCate,containerListCate} = styles
     return ( 
-        <MainLayout>
+        // <MainLayout>
             
-            <div className = {container}>
-                
-                <div className={containerList}>
+            <div className = {containerCate}>
+                <div className={containerListCate}>
                         {data.map((item)=>(
-                            <div key = {item.productID} className={containerItem}>
+                            <div key = {item.productID} className={containerItemCate}>
                                  <ProductsItem 
                                     productID ={item.productID}
                                     src = {item.src}
@@ -25,8 +24,8 @@ function ListProducts({data}) {
                         ))}  
                 </div>
             </div>
-        </MainLayout>
+        // </MainLayout>
      );
 }
 
-export default ListProducts;
+export default ListProductsCate;

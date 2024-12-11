@@ -7,6 +7,7 @@ import MyHeader from './components/Header/Header';
 import MyFooter from './components/Footer/Footer';
 import MainLayout from './components/Layout/Layout';
 import '@styles/main.scss';
+
 import { ToastProvider } from '@/context/ToastProvider';
 import { StoreProvider } from '@/context/StoreProvider';
 // import "slick-carousel/slick/slick.css"; 

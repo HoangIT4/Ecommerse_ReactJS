@@ -1,17 +1,25 @@
 import React, { useState } from 'react';
 import { TextField, Button, Radio, RadioGroup, FormControlLabel, FormLabel, FormControl, Typography, Box, Avatar, Paper } from '@mui/material';
 import { Stack } from 'react-bootstrap';
+import { useEffect } from 'react';
+import {getInfo} from '@/apis/authService';
+import { useContext } from 'react';
+import { StoreContext } from '@/context/StoreProvider';
 
 const UserProfile = () => {
+
+  const { userInfo } = useContext(StoreContext);
+  
+  
   const [formData, setFormData] = useState({
-    username: '',
+    username:'',
     name: '',
     email: '',
     gender: 'Nam',
-    birthDay: '',
+    irthDay: '',
     birthMonth: '',
     birthYear: '',
-    phoneLinked: false,
+    phoneNumber: false,
   });
 
   const [avatar, setAvatar] = useState(null);
@@ -34,6 +42,29 @@ const UserProfile = () => {
       setAvatar(URL.createObjectURL(file)); 
     }
   };
+
+
+  useEffect(() => {
+    if (userInfo) {
+      console.log(userInfo);
+      
+      setFormData({
+        ...formData,
+        name: userInfo.userName || '',
+        email: userInfo.email || '',
+        gender: userInfo.gender || 'Nam',
+        birthDay: userInfo.birthDay || '',
+        birthMonth: userInfo.birthMonth || '',
+        birthYear: userInfo.birthYear || '',
+        phoneNumber: userInfo.phoneNumber || false,
+      });
+      
+      // Nếu có ảnh đại diện, đặt avatar
+      if (userInfo.avatar) {
+        setAvatar(userInfo.avatar);
+      }
+    }
+  }, [userInfo]);
 
   return (
     <Box display="flex" p={2}  sx={{ flexDirection: { xs: 'column', md: 'row' } }}> 
@@ -86,9 +117,9 @@ const UserProfile = () => {
               onChange={handleChange}
               row
             >
-              <FormControlLabel value="Nam" control={<Radio />} label="Nam" style={{fontFamily:'"Roboto Mono", monospace'}}/>
-              <FormControlLabel value="Nữ" control={<Radio />} label="Nữ" style={{fontFamily:'"Roboto Mono", monospace'}}/>
-              <FormControlLabel value="Khác" control={<Radio />} label="Khác" style={{fontFamily:'"Roboto Mono", monospace'}}/>
+              <FormControlLabel value="Nam" control={<Radio />} label="Male" style={{fontFamily:'"Roboto Mono", monospace'}}/>
+              <FormControlLabel value="Nữ" control={<Radio />} label="Female" style={{fontFamily:'"Roboto Mono", monospace'}}/>
+              <FormControlLabel value="Khác" control={<Radio />} label="Other" style={{fontFamily:'"Roboto Mono", monospace'}}/>
             </RadioGroup>
           </FormControl>
 

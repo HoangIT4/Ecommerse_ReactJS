@@ -8,7 +8,7 @@ import detailIcon from '@icons/svgs/detail-icon.svg';
 import Cookies from 'js-cookie';
 import { useContext } from 'react';
 import {ToastContext} from '@/context/ToastProvider';
-
+import { HOST_BE} from '@/config/url'
 import {SideBarContext} from '@/context/SidebarProvider'
 import { addProductToCart } from '@/apis/cartService';
 
@@ -16,13 +16,14 @@ function ProductsItem({productID,src,preImg,name,formattedPrice}) {
     const {containerItem,boxImg,showImageWhenHover,showFncWhenHover,Icon,title,priceCls,ClickSpace} = styles
     const navigate = useNavigate();
     const UserID = Cookies.get('UserID')
+    // const [selectedProduct, setSelectedProduct] = useState(null);
     const {setIsOpen, setType, handleGetListProductCart} = useContext(SideBarContext);
     const { toast } = useContext(ToastContext);
 
 
 
     const handleProductClick = (data) => {
-        console.log(data);
+        // setSelectedProduct(data)
         navigate(`/productdetail/${productID}`);
         
     };
@@ -68,9 +69,8 @@ function ProductsItem({productID,src,preImg,name,formattedPrice}) {
            
         >
             <div className={boxImg}>
-                <img src = {src}  />
-                <img src = {preImg}
-                className={showImageWhenHover}/>
+                <img src={src.startsWith("http") ? src : `${HOST_BE}${src}`} alt={name} />
+                <img src={preImg.startsWith("http") ? preImg : `${HOST_BE}${preImg}`} className={showImageWhenHover}/>
 
                 <div className={showFncWhenHover}>
                     <div className={Icon} onClick={handleAddToCart}>

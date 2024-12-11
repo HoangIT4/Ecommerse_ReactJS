@@ -2,7 +2,7 @@ import MainLayout from '@components/Layout/Layout';
 import styles from './styles.module.scss'
 import { useState, useEffect } from 'react';
 import { Checkbox } from 'antd';
-import ListProducts from '@components/ListProducts/ListProducts';
+import ListProductsCate from '@pages/CategoriesPage/component/ListProductsCate';
 import {getProducts} from '@/apis/productsService';
 import { getBrands } from '@/apis/brandsService';
 import { getCategories } from '@/apis/categoryService';
@@ -67,8 +67,6 @@ function Categoriespage() {
     useEffect(() => {
         getProducts()
         .then( res =>{
-            console.log(res.data);
-            
             setListProducts(res.data)
   
         });
@@ -119,7 +117,7 @@ function Categoriespage() {
                          
                 </div>
                 <div className={productList}>
-                    <ListProducts data={filteredProducts}/>
+                    <ListProductsCate data={filteredProducts}/>
                 </div>
             </div>
         </MainLayout>

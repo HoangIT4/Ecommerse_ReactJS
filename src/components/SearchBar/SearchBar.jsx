@@ -6,6 +6,7 @@ import searchImage from "@icons/svgs/search-icon.svg";
 import styles from "./styles.module.scss";
 import debounce from "lodash/debounce";
 import {getProducts} from '@/apis/productsService';
+import { getProductById } from '@/apis/productsService';
 
 const SearchBar = (props) => {
   const {id, isText } = props;
@@ -21,21 +22,12 @@ const SearchBar = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      setIsLoading(true);
-      try {
-        const products = await getProducts();
-        setProducts(products); // Lưu danh sách sản phẩm
-        console.log(products);
-        
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-      setIsLoading(false);
-    };
-
-    fetchProducts();
-  }, []);
+    getProducts().then(res => {
+      setProducts(res.data)
+      
+    })
+    // Gọi hàm fetch dữ liệu sản phẩm
+  }, []); // Chạy khi component mount lần đầu
 
 
 
@@ -48,8 +40,8 @@ const SearchBar = (props) => {
           return;
         }
 
-        const filtered = products.filter((product) =>
-          product.name.toLowerCase().includes(query)
+        const filtered = products.filter((products) =>
+          products.name.toLowerCase().includes(query)
         );
 
         setFilteredProducts(filtered);
@@ -71,9 +63,11 @@ const SearchBar = (props) => {
 
   const debouncedNavigateProduct = useMemo(
     () =>
-      debounce((id) => {
+      debounce(async (id) => {
+        const productDetail = await getProductById(id); // Gọi API lấy chi tiết sản phẩm
+        console.log(productDetail); // Kiểm tra dữ liệu trả về
         navigate(`/productdetail/${id}`);
-        window.location.reload(); // Reload the page after navigation
+        window.location.reload(); // Tải lại trang sau khi chuyển hướng
       }, 500),
     [navigate]
   );

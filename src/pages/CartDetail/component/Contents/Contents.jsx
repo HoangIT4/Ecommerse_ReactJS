@@ -7,10 +7,11 @@ import Button from '@components/Button/Button';
 import { SideBarContext } from '@/context/SidebarProvider';
 import { PiShoppingCartLight } from 'react-icons/pi';
 import { addProductToCart,deleteItem , deleteCart} from '@/apis/cartService';
+import CheckoutForm from './CheckOut';
 
 
 
-function Contents() {
+function Contents({ currentStep, nextStep }) {
     const {
         containerContents,boxFooter,boxBtnDelete,boxCoupon,
         boxEmptyCart,titleEmpty,boxBtnEmpty
@@ -74,6 +75,7 @@ function Contents() {
     return (  
         <div>
             {listProductCart.length > 0 && UserID ? (
+                currentStep === 0 ? (
                 <div className={containerContents}>
                     <div  style={{
                                 width: '58%'
@@ -100,8 +102,9 @@ function Contents() {
                         </div>
                     </div>
                 </div>
-                <CartSummary/>  
+                <CartSummary nextStep={nextStep} />
                 </div>
+                ): null
             ) : (
                 <div className={boxEmptyCart}>
                     <PiShoppingCartLight
@@ -123,7 +126,18 @@ function Contents() {
                         />
                     </div>
                 </div>
+                
             )}
+
+            {currentStep === 1 && (
+                    <div>
+                        {/* Form Checkout của bạn sẽ xuất hiện ở đây */}
+                        <CheckoutForm />
+                    </div>
+                )}
+    
+                {/* Nút "Proceed to Checkout" */}
+                
     </div>
     );
 }

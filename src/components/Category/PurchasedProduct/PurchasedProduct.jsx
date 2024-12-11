@@ -8,7 +8,7 @@ function PurchasedPro() {
             <img src={PurchasedProduct} style={{width:'60px',height:'60px'}}></img>
             </div>
             
-            <div className={title}>Purchased Products</div>
+            <div className={title}>New Products</div>
         </div>
     );
 }

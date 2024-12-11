@@ -7,7 +7,7 @@
 }
 
 .container{
-    width: 1280px;
+    max-width: 1280px;
 
     @media (max-width: 768px) {
         width: 80%; // Thu hẹp chiều rộng trên màn hình nhỏ

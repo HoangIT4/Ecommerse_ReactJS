@@ -6,7 +6,7 @@
     @include flex_box_custom(center,flex-start,0px);
     width: 100%;
     margin-top: 40px;
-    height: 80vh;
+    min-height: 80vh;
     background-color: #fff;
     border-radius: 20px;
    
@@ -23,7 +23,34 @@
        
     }
     .productList{
+        padding: 20px;
         width: 85%;
+
+        .containerCate{
+            @include flex_box_custom(flex-start,center, 80px);
+            margin-top: 20px;
+            flex-wrap: wrap;
+            height: auto;
+            
+        }
+        
+        
+        
+        .containerListCate{
+            @include flex_box_custom(space-between,center, 10px);
+            background-size: cover;
+            flex-wrap: wrap;    
+            
+        }
+        
+        
+        
+        
+        .productsNameCate{
+            @include flex_box_custom(center,center,0px);
+            margin: 12px;
+            
+        }
     }
 
    
@@ -32,4 +59,8 @@
         margin-top: 10px;
         margin-bottom: 20px;
     }
+
+
+
+   
 }

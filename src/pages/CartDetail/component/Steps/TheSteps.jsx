@@ -16,50 +16,50 @@ const steps = [
       content: 'Last-content',
     },
   ];
-const TheSteps = () =>{
+const TheSteps = ({ currentStep, nextStep, prevStep }) =>{
     const {containerSteps} = styles
 
-    const { token } = theme.useToken();
-    const [current, setCurrent] = useState(0);
-    const next = () => {
-      setCurrent(current + 1);
-    };
-    const prev = () => {
-      setCurrent(current - 1);
-    };
+    // const { token } = theme.useToken();
+    // const [current, setCurrent] = useState(0);
+    // const next = () => {
+    //   setCurrent(current + 1);
+    // };
+    // const prev = () => {
+    //   setCurrent(current - 1);
+    // };
     const items = steps.map((item) => ({
       key: item.title,
       title: item.title,
     }));
-    const contentStyle = {
-      lineHeight: '260px',
-      textAlign: 'center',
-      color: token.colorTextTertiary,
-      backgroundColor: token.colorFillAlter,
-      borderRadius: token.borderRadiusLG,
-      border: `1px dashed ${token.colorBorder}`,
-      marginTop: 16,
-    };
+    // const contentStyle = {
+    //   lineHeight: '260px',
+    //   textAlign: 'center',
+    //   color: token.colorTextTertiary,
+    //   backgroundColor: token.colorFillAlter,
+    //   borderRadius: token.borderRadiusLG,
+    //   border: `1px dashed ${token.colorBorder}`,
+    //   marginTop: 16,
+    // };
     return ( 
         <div className={containerSteps}>
-            <Steps className={styles.customSteps} current={current} items={items} style={{fontFamily: '"Roboto Mono", monospace'}}/>
+            <Steps className={styles.customSteps} current={currentStep} items={items} style={{fontFamily: '"Roboto Mono", monospace'}}/>
             {/* <div style={contentStyle}>{steps[current].content}</div> */}
             <div
                 style={{
                 marginTop: 24,
                 }}
             >
-                {current < steps.length - 1 && (
+                {/* {currentStep < steps.length - 1 && (
                 <Button type="primary" onClick={() => next()}>
                     Next
                 </Button>
                 )}
-                {current === steps.length - 1 && (
+                {currentStep === steps.length - 1 && (
                 <Button type="primary" onClick={() => message.success('Processing complete!')}>
                     Done
                 </Button>
                 )}
-                {current > 0 && (
+                {currentStep > 0 && (
                 <Button
                     style={{
                     margin: '0 8px',
@@ -68,7 +68,7 @@ const TheSteps = () =>{
                 >
                     Previous
                 </Button>
-                )}
+                )} */}
             </div>  
         </div>
      );

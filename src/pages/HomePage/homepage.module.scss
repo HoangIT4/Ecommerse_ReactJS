@@ -4,12 +4,12 @@
 
 .container{
     position: relative;
-    
-   
+    min-height: 10px  
 }
+
 .attention{
     @include flex_box_custom(center,center, 0px);
-    padding-top: 30px;
+    padding-top: 10px;
     color: rgb(214, 37, 37);
     font-size: 18px
 }

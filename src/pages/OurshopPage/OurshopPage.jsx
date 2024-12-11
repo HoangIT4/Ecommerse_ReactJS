@@ -15,7 +15,8 @@ function OurShopPage() {
     const [listProducts,setListProducts] = useState([]);
     const [listBrands,setListBrands] = useState([])
     const [listCategories,setListCategories] = useState([])
-  
+
+    
 
     useEffect(() => {
         getProducts().then( res =>{

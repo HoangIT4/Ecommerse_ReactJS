@@ -7,7 +7,6 @@ const getProducts = async () =>{
 const getProductById = async (productId) => {
   
   const res = await axiosClient.get(`/Product/${productId}`);
-  console.log(res);
   return res.data;
   
   };

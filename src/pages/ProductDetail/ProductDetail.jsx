@@ -7,6 +7,7 @@ import styles from './productdetail.module.scss'
 import reloadIcon from '@icons/svgs/reload-icon.svg';
 import wlIcon from '@icons/svgs/wish-list.svg';
 import MainLayout from '@components/Layout/Layout';
+import { HOST_BE } from "@/config/url";
 import { FormControl } from 'react-bootstrap';
 
 
@@ -31,6 +32,8 @@ function  ProductDetail() {
     } = styles;
     const [quantity,setQuantity]= useState(1);
     const [productData, setProductData] = useState(null);
+    console.log(productData);
+    
 
     const handleIncrease = () => {
         if (quantity < productData.stock) {
@@ -69,11 +72,11 @@ function  ProductDetail() {
 
                             <div className={boxImg}>
                                 <div className={anotherPicture}>                         
-                                        <img src={productData.preImg}  style={{width:'100px'}} alt="Secondary" />
+                                        <img src={productData.preImg.startsWith("http") ? productData.preImg : `${HOST_BE}${productData.preImg}`}  style={{width:'100px'}} alt="Secondary" />
                                     
                                 </div>
                                 <div>
-                                <img src={productData.src} style={{ width: '400px', border: '1px solid #e1e1e1', borderRadius: '20px' }} alt="Main" />
+                                <img src={productData.src.startsWith("http") ? productData.src : `${HOST_BE}${productData.src}`} style={{ width: '400px', border: '1px solid #e1e1e1', borderRadius: '20px' }} alt="Main" />
                                 </div>
                         
                         

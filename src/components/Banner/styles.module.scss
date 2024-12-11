@@ -7,6 +7,7 @@
     position: relative;
     background-image: url(../../assets/icons/images/Banner.png);
     min-height: 506px;
+    // max-width: 1200px;
     background-repeat: no-repeat;
     background-size:contain;
     background-position:center;
@@ -19,7 +20,7 @@
     
     @media (max-width: 768px) {
         // Điều chỉnh min-height cho di động
-        min-height: 300px;
+        min-height: 200px;
         // Background kích thước bao phủ toàn bộ khu vực
         background-size: cover;
     
@@ -38,7 +39,7 @@
       @media (max-width: 576px) {
         min-height: 200px;
         background-size: contain;
-        width: 100%;
+        // width: 100%;
         margin-left: 5px;
         margin-right: 5px;
         padding: 0px;

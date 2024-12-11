@@ -4,10 +4,11 @@ import Button from '@components/Button/Button';
 import cls from 'classnames';
 import zalopaylogo from '@icons/images/ZaloPay.svg'
 import { useContext } from 'react';
-import {SideBarContext} from '@/context/SidebarProvider'
+import {SideBarContext} from '@/context/SidebarProvider';
 import LoadingCart from '@pages/CartDetail/component/LoadingCart';
-
-const CartSummary = ({ nextStep }) => {
+import { DeleteOutlined  } from '@ant-design/icons';
+import SelectBox from '@pages/CartDetail/component/SelectBox'
+function YourOrder({ nextStep, formState, handleSubmit  }) {
     const {
         containerSummary,
         title,
@@ -23,7 +24,18 @@ const CartSummary = ({ nextStep }) => {
         imgMethods,
         textSecure
     } = styles;
+
     const { listProductCart, isLoading } = useContext(SideBarContext);
+
+    const showOptions = [
+        { label: '1', value: '1' },
+        { label: '2', value: '2' },
+        { label: '3', value: '3' },
+        { label: '4', value: '4' },
+        { label: '5', value: '5' },
+        { label: '6', value: '6' },
+        { label: '7', value: '7' }
+    ];
 
     const srcMethods = [
         'https://xstore.8theme.com/elementor2/marseille04/wp-content/themes/xstore/images/woocommerce/payment-icons/visa.jpeg',
@@ -37,9 +49,12 @@ const CartSummary = ({ nextStep }) => {
         return acc + item.total;
     },0).toFixed(3);;
 
-    return (
-        <div className={containerRight}>
+  
+
+    return (  
+            <div className={containerRight}>
             <div className={containerSummary}>
+            
                 <div className={title}>CART TOTALS</div>
  
                 <div className={cls(boxTotal, subTotal)}>
@@ -52,9 +67,9 @@ const CartSummary = ({ nextStep }) => {
                     <div>{Total}đ</div>
                 </div>
 
-                <Button content={'PROCEED TO CHECKOUT'}  onClick={nextStep} />
+                <Button content={'PLACE ORDER'}  onClick={handleSubmit} />
                 <div className={space} />
-                <Button content={'CONTINUE SHOPPING'} isPriamry={false} />
+                <Button content={'RETURN'} isPriamry={false} />
 
                 {isLoading && <LoadingCart />}
             </div>
@@ -80,7 +95,8 @@ const CartSummary = ({ nextStep }) => {
 
             <div className={textSecure}>Your Payment is 100% Secure</div>
         </div>
+    
     );
-};
+}
 
-export default CartSummary;
+export default YourOrder;

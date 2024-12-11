@@ -5,7 +5,8 @@
 
 .container{
     @include flex_box_custom(center,center, 0px);
-    width: 100%;
+    min-width: 1280px;
+
     background-color: $another-color;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); 
     left: 0;

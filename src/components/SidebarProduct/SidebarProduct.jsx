@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import { SideBarContext } from '@/context/SidebarProvider';
 import { CloseOutlined } from '@ant-design/icons';
+import { HOST_BE } from "@/config/url";
 import LoadingTextCommon from '@components/LoadingTextCommon/LoadingTextCommon';
 
 
@@ -42,7 +43,7 @@ function SidebarProduct({
         
     <div className={container}> 
         <div>
-            <img src={src}></img>
+            <img src={src.startsWith("http") ? src : `${HOST_BE}${src}`}></img>
         </div>
         <div className={boxClose} style={{fontSize:'15px'}} onClick={handleRemoveItem}>
             <CloseOutlined/>
