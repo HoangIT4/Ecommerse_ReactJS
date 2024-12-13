@@ -10,6 +10,7 @@ import '@styles/main.scss';
 
 import { ToastProvider } from '@/context/ToastProvider';
 import { StoreProvider } from '@/context/StoreProvider';
+import { CheckoutProvider } from './context/CheckoutProvider';
 // import "slick-carousel/slick/slick.css"; 
 // import "slick-carousel/slick/slick-theme.css";
 
@@ -22,12 +23,14 @@ function App() {
     <BrowserRouter>
       <StoreProvider>
         <ToastProvider>
+        <CheckoutProvider>
           <SideBarProvider>
               <Sidebar/>
                 <MyHeader/>
                   <Router />
                 <MyFooter/>
           </SideBarProvider>
+        </CheckoutProvider>
         </ToastProvider>
       </StoreProvider>
     </BrowserRouter>  

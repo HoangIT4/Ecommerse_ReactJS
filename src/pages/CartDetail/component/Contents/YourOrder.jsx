@@ -1,15 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from '../../styles.module.scss';
 import Button from '@components/Button/Button';
 import cls from 'classnames';
-import zalopaylogo from '@icons/images/ZaloPay.svg'
-import { useContext } from 'react';
-import {SideBarContext} from '@/context/SidebarProvider';
+import { SideBarContext } from '@/context/SidebarProvider';
+import { createOrder } from '@/apis/orderService';
 import LoadingCart from '@pages/CartDetail/component/LoadingCart';
-import { DeleteOutlined  } from '@ant-design/icons';
-import SelectBox from '@pages/CartDetail/component/SelectBox'
+import zalopaylogo from '@icons/images/ZaloPay.svg';
 
-function YourOrder({ formState, handleSubmit}) {
+function YourOrder({ formState, userId, handleSubmit }) {
     const {
         containerSummary,
         title,
@@ -17,10 +15,8 @@ function YourOrder({ formState, handleSubmit}) {
         price,
         subTotal,
         totals,
-        space,
         containerMethods,
         titleMethods,
-        containerRight,
         boxImgMethods,
         imgMethods,
         textSecure
@@ -28,50 +24,39 @@ function YourOrder({ formState, handleSubmit}) {
 
     const { listProductCart, isLoading } = useContext(SideBarContext);
 
-    const showOptions = [
-        { label: '1', value: '1' },
-        { label: '2', value: '2' },
-        { label: '3', value: '3' },
-        { label: '4', value: '4' },
-        { label: '5', value: '5' },
-        { label: '6', value: '6' },
-        { label: '7', value: '7' }
-    ];
+    const Total = listProductCart.reduce((acc, item) => acc + item.total, 0).toFixed(3);
 
-    const srcMethods = [
-        'https://xstore.8theme.com/elementor2/marseille04/wp-content/themes/xstore/images/woocommerce/payment-icons/visa.jpeg',
-        'https://xstore.8theme.com/elementor2/marseille04/wp-content/themes/xstore/images/woocommerce/payment-icons/master-card.jpeg',
-        'https://pos.hn.ss.bfcplatform.vn/inside/f590a670-abc8-45eb-b52a-8161c18a94c1',
-            zalopaylogo ,
-        // 'https://xstore.8theme.com/elementor2/marseille04/wp-content/themes/xstore/images/woocommerce/payment-icons/maestro.jpeg',
-    ];
+    const placeOrder = async () => {
+        try {
+            const orderData = {
+                userId: '5f357621-a032-4a3e-bed7-8fbcea1dc409', // Include userId here
+                ...formState,
+                // totalPrice: Total,
+                // products: listProductCart
+            };
+            console.log("Sending order data:", orderData);
+            const response = await createOrder(orderData);
+            console.log("Order placed successfully:", response);
+            alert("Đặt hàng thành công!");
+        } catch (error) {
+            console.error("Error placing order:", error);
+            alert("Đặt hàng thất bại! Vui lòng thử lại.");
+        }
+    };
 
-    const Total = listProductCart.reduce((acc, item) => {
-        return acc + item.total;
-    },0).toFixed(3);;
-
-  
-
-    return (  
-            <div className={containerRight}>
+    return (
+        <div className={styles.containerRight}>
             <div className={containerSummary}>
-            
                 <div className={title}>CART TOTALS</div>
- 
                 <div className={cls(boxTotal, subTotal)}>
                     <div>Subtotal</div>
                     <div className={price}>{Total}đ</div>
                 </div>
-
                 <div className={cls(boxTotal, totals)}>
                     <div>TOTAL</div>
                     <div>{Total}đ</div>
                 </div>
-
-                <Button content={'PLACE ORDER'}  onClick={handleSubmit}  />
-                <div className={space} />
-                <Button content={'RETURN'} isPriamry={false} />
-
+                <Button content={"PLACE ORDER"} onClick={placeOrder} />
                 {isLoading && <LoadingCart />}
             </div>
 
@@ -79,24 +64,14 @@ function YourOrder({ formState, handleSubmit}) {
                 <div className={titleMethods}>
                     Guaranteed <span>safe</span> checkout
                 </div>
-
                 <div className={boxImgMethods}>
-                    {srcMethods.map((src, index) => {
-                        return (
-                            <img
-                                src={src}
-                                alt={src}
-                                className={imgMethods}
-                                key={index}
-                            />
-                        );
-                    })}
+                    <img src={zalopaylogo} alt="ZaloPay" className={imgMethods} />
+                    {/* Add other payment method logos here */}
                 </div>
             </div>
 
             <div className={textSecure}>Your Payment is 100% Secure</div>
         </div>
-    
     );
 }
 

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { CheckoutContext } from '../../../../context/CheckoutProvider';
 
 // Định nghĩa styles
 const styles = {
@@ -28,48 +29,16 @@ const styles = {
   invalidInput: {
     borderColor: '#dc3545'
   },
-  formRow: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    margin: '0 -15px'
-  },
-  formGroupCol: {
-    flex: '0 0 33.333%',
-    maxWidth: '33.333%',
-    padding: '0 15px',
-    marginBottom: '1rem'
-  },
-  select: {
-    width: '100%',
-    padding: '0.375rem 0.75rem',
-    fontSize: '1rem',
-    border: '1px solid #ced4da',
-    borderRadius: '0.25rem'
-  },
   invalidFeedback: {
     color: '#dc3545',
     fontSize: '80%',
     marginTop: '0.25rem'
   },
-  formCheck: {
-    marginBottom: '0.5rem'
-  },
-  radioInput: {
-    marginRight: '0.5rem'
-  },
-  button: {
-    backgroundColor: '#007bff',
-    color: 'white',
-    padding: '0.5rem 1rem',
-    border: 'none',
-    borderRadius: '0.25rem',
-    cursor: 'pointer',
-    width: '100%'
-  }
 };
 
 const BillDetail = ({ formState, setFormState, handleSubmit }) => {
-  // Xác thực với Yup
+  const { setCheckoutData } = useContext(CheckoutContext);
+
   const validationSchema = Yup.object({
     fullName: Yup.string().required('Họ và tên là bắt buộc'),
     email: Yup.string().email('Email không hợp lệ').required('Email là bắt buộc'),
@@ -82,26 +51,30 @@ const BillDetail = ({ formState, setFormState, handleSubmit }) => {
   });
 
   const handleFormSubmit = (values) => {
-    setFormState(values);
-    handleSubmit();
+    console.log("Form submitted with values:", values); // Log giá trị khi gửi form
+    setCheckoutData(values);
+    setFormState(values); // Cập nhật formState
+    handleSubmit(); // Gọi hàm handleSubmit từ CheckoutForm
   };
 
   return (
     <Formik
-        initialValues={formState}
+      initialValues={formState}
       validationSchema={validationSchema}
       onSubmit={handleFormSubmit}
     >
-      {({ handleSubmit, handleChange, values, errors, touched }) => (
+      {({ handleSubmit, handleChange, setFieldValue, values, errors, touched }) => (
         <form onSubmit={handleSubmit} style={styles.form}>
-          {/* Thông tin cá nhân */}
           <div style={styles.formGroup}>
             <label style={styles.label} htmlFor="fullName">Họ và Tên</label>
             <input
               type="text"
               name="fullName"
               value={values.fullName}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+                setFormState((prev) => ({ ...prev, fullName: e.target.value }));
+              }}
               style={{
                 ...styles.input,
                 ...(errors.fullName && touched.fullName ? styles.invalidInput : {})
@@ -118,7 +91,10 @@ const BillDetail = ({ formState, setFormState, handleSubmit }) => {
               type="email"
               name="email"
               value={values.email}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+                setFormState((prev) => ({ ...prev, email: e.target.value }));
+              }}
               style={{
                 ...styles.input,
                 ...(errors.email && touched.email ? styles.invalidInput : {})
@@ -135,7 +111,10 @@ const BillDetail = ({ formState, setFormState, handleSubmit }) => {
               type="text"
               name="phoneNumber"
               value={values.phoneNumber}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+                setFormState((prev) => ({ ...prev, phoneNumber: e.target.value }));
+              }}
               style={{
                 ...styles.input,
                 ...(errors.phoneNumber && touched.phoneNumber ? styles.invalidInput : {})
@@ -152,7 +131,10 @@ const BillDetail = ({ formState, setFormState, handleSubmit }) => {
               type="text"
               name="address"
               value={values.address}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+                setFormState((prev) => ({ ...prev, address: e.target.value }));
+              }}
               style={{
                 ...styles.input,
                 ...(errors.address && touched.address ? styles.invalidInput : {})
@@ -163,115 +145,96 @@ const BillDetail = ({ formState, setFormState, handleSubmit }) => {
             )}
           </div>
 
-          Địa chỉ chi tiết
-          <div style={styles.formRow}>
-            <div style={styles.formGroupCol}>
-              <label style={styles.label} htmlFor="city">Tỉnh/Thành</label>
-              <select
-                name="city"
-                onChange={handleChange}
-                value={values.city}
-                style={{
-                  ...styles.select,
-                  ...(errors.city && touched.city ? styles.invalidInput : {})
-                }}
-              >
-                <option value="">Chọn tỉnh/thành</option>
-                <option value="Hanoi">Hà Nội</option>
-                <option value="HCM">TP. Hồ Chí Minh</option>
-              </select>
-              {errors.city && touched.city && (
-                <div style={styles.invalidFeedback}>{errors.city}</div>
-              )}
-            </div>
-
-            <div style={styles.formGroupCol}>
-              <label style={styles.label} htmlFor="district">Quận/Huyện</label>
-              <select
-                name="district"
-                onChange={handleChange}
-                value={values.district}
-                style={{
-                  ...styles.select,
-                  ...(errors.district && touched.district ? styles.invalidInput : {})
-                }}
-              >
-                <option value="">Chọn quận/huyện</option>
-                <option value="Q1">Quận 1</option>
-                <option value="Q2">Quận 2</option>
-              </select>
-              {errors.district && touched.district && (
-                <div style={styles.invalidFeedback}>{errors.district}</div>
-              )}
-            </div>
-
-            <div style={styles.formGroupCol}>
-              <label style={styles.label} htmlFor="ward">Phường/Xã</label>
-              <select
-                name="ward"
-                onChange={handleChange}
-                value={values.ward}
-                style={{
-                  ...styles.select,
-                  ...(errors.ward && touched.ward ? styles.invalidInput : {})
-                }}
-              >
-                <option value="">Chọn phường/xã</option>
-                <option value="Ward1">Phường 1</option>
-                <option value="Ward2">Phường 2</option>
-              </select>
-              {errors.ward && touched.ward && (
-                <div style={styles.invalidFeedback}>{errors.ward}</div>
-              )}
-            </div>
+          <div style={styles.formGroup}>
+            <label style={styles.label} htmlFor="city">Tỉnh/Thành</label>
+            <select
+              name="city"
+              onChange={(e) => {
+                handleChange(e);
+                setFormState((prev) => ({ ...prev, city: e.target.value }));
+              }}
+              value={values.city}
+              style={{
+                ...styles.input,
+                ...(errors.city && touched.city ? styles.invalidInput : {})
+              }}
+            >
+              <option value="">Chọn tỉnh/thành</option>
+              <option value="Hanoi">Hà Nội</option>
+              <option value="HCM">TP. Hồ Chí Minh</option>
+            </select>
+            {errors.city && touched.city && (
+              <div style={styles.invalidFeedback}>{errors.city}</div>
+            )}
           </div>
 
-          {/* Phương thức thanh toán */}
+          <div style={styles.formGroup}>
+            <label style={styles.label} htmlFor="district">Quận/Huyện</label>
+            <select
+              name="district"
+              onChange={(e) => {
+                handleChange(e);
+                setFormState((prev) => ({ ...prev, district: e.target.value }));
+              }}
+              value={values.district}
+              style={{
+                ...styles.input,
+                ...(errors.district && touched.district ? styles.invalidInput : {})
+              }}
+            >
+              <option value="">Chọn quận/huyện</option>
+              <option value="Q1">Quận 1</option>
+              <option value="Q2">Quận 2</option>
+            </select>
+            {errors.district && touched.district && (
+              <div style={styles.invalidFeedback}>{errors.district}</div>
+            )}
+          </div>
+
+          <div style={styles.formGroup}>
+            <label style={styles.label} htmlFor="ward">Phường/Xã</label>
+            <select
+              name="ward"
+              onChange={(e) => {
+                handleChange(e);
+                setFormState((prev) => ({ ...prev, ward: e.target.value }));
+              }}
+              value={values.ward}
+              style={{
+                ...styles.input,
+                ...(errors.ward && touched.ward ? styles.invalidInput : {})
+              }}
+            >
+              <option value="">Chọn phường/xã</option>
+              <option value="Ward1">Phường 1</option>
+              <option value="Ward2">Phường 2</option>
+            </select>
+            {errors.ward && touched.ward && (
+              <div style={styles.invalidFeedback}>{errors.ward}</div>
+            )}
+          </div>
+
           <div style={styles.formGroup}>
             <label style={styles.label}>Phương thức thanh toán</label>
-            <div style={styles.formCheck}>
+            <div>
               <input
                 type="radio"
                 id="payment-cod"
                 name="paymentMethod"
                 value="cod"
-                onChange={handleChange}
+                onChange={(e) => {
+                  handleChange(e);
+                  setFormState((prev) => ({ ...prev, paymentMethod: e.target.value }));
+                }}
                 checked={values.paymentMethod === 'cod'}
-                style={styles.radioInput}
               />
               <label htmlFor="payment-cod">Thanh toán khi nhận hàng</label>
             </div>
-            {/* <div style={styles.formCheck}>
-              <input
-                type="radio"
-                id="payment-credit"
-                name="paymentMethod"
-                value="credit"
-                onChange={handleChange}
-                checked={values.paymentMethod === 'credit'}
-                style={styles.radioInput}
-              />
-              <label htmlFor="payment-credit">Thanh toán bằng thẻ tín dụng</label>
-            </div>
-            <div style={styles.formCheck}>
-              <input
-                type="radio"
-                id="payment-banking"
-                name="paymentMethod"
-                value="banking"
-                onChange={handleChange}
-                checked={values.paymentMethod === 'banking'}
-                style={styles.radioInput}
-              />
-              <label htmlFor="payment-banking">Thanh toán bằng ngân hàng</label>
-            </div> */}
+
             {errors.paymentMethod && touched.paymentMethod && (
               <div style={styles.invalidFeedback}>{errors.paymentMethod}</div>
             )}
           </div>
-
-          {/* Nút submit */}
-         
         </form>
       )}
     </Formik>
