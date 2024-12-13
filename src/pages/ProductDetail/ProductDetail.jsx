@@ -9,13 +9,55 @@ import wlIcon from '@icons/svgs/wish-list.svg';
 import MainLayout from '@components/Layout/Layout';
 import { HOST_BE } from "@/config/url";
 import { FormControl } from 'react-bootstrap';
-
+import Cookies from 'js-cookie';
+import { useContext } from 'react';
+import {ToastContext} from '@/context/ToastProvider';
+import {SideBarContext} from '@/context/SidebarProvider'
+import { addProductToCart } from '@/apis/cartService';
 
 
 function  ProductDetail() {
     const { productId} = useParams();
     const navigate = useNavigate();
+
+    const UserID = Cookies.get('UserID')
+    const {setIsOpen, setType, handleGetListProductCart} = useContext(SideBarContext);
+    const { toast } = useContext(ToastContext);
  
+    const handleAddToCart = () => {
+        if (!UserID) {
+            setIsOpen(true);
+            setType("user");
+            toast.warning('Vui lòng đăng nhập để thêm vào giỏ hàng');
+            return; 
+        }
+    
+        // Đảm bảo số lượng không vượt quá số lượng tồn kho
+        if (quantity > productData.stock) {
+            toast.error(`Chỉ còn ${productData.stock} sản phẩm trong kho.`);
+            return;
+        }
+    
+        const data = {
+            userID: UserID,
+            productID: productData.productID,
+            quantity: quantity, // Đảm bảo số lượng chính xác được gửi
+            productPrice: formattedPrice
+        };
+    
+        addProductToCart(data)
+            .then((res) => {    
+          
+                setIsOpen(true);
+                setType('cart');
+                toast.success(res.message, { autoClose: 1000 });
+                handleGetListProductCart(UserID, 'cart');  // Làm mới giỏ hàng
+            })
+            .catch((error) => {
+                toast.error(error.message);
+            });
+    };
+
 
     const {
         leftContent,container,
@@ -51,6 +93,8 @@ function  ProductDetail() {
         const fetchProduct = async () => {
             try {
                 const data = await getProductById(productId);
+                console.log(data);
+                
                 setProductData(data);
             } catch (error) {
                 console.error('Failed to fetch product:', error);
@@ -87,7 +131,7 @@ function  ProductDetail() {
                             <div className={nameProduct} style={{marginBottom:'15px'}} >
                             {productData.name}
                             </div>  
-                            <div style={{fontSize:'18PX',color:'red'}} >{productData.price} đ</div>    
+                            <div style={{fontSize:'18PX',color:'red'}} >{productData.formattedPrice} đ</div>    
                             <div style={{fontSize:'18PX'}}>Brand: {productData.brands.brandName}</div>      
                             <div className={desciption}>
                                 Description: {productData.description}
@@ -133,7 +177,7 @@ function  ProductDetail() {
                                     +
                                 </button>
                                 </div>
-                                <button type="button" className={buttonStyle}>ADD TO CART</button>
+                                <button type="button" className={buttonStyle} onClick={handleAddToCart}>ADD TO CART</button>
                             </div>
                             <div>Stock: {productData.stock}</div>
                             <div className={headlineOR}>

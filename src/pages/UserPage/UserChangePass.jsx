@@ -2,26 +2,59 @@ import React, { useState } from 'react';
 import { Box, Button, TextField, Typography, IconButton, InputAdornment } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import {changePassword} from '@/apis/authService'
+import { useContext } from 'react';
+import Cookies from 'js-cookie';
+import {ToastContext} from '@/context/ToastProvider';
 
 
 const UserChangePass = () => {
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { toast } = useContext(ToastContext);
+  const UserID = Cookies.get('UserID')
+ 
 
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
+  const handleClickShowPassword = (setShowFunction) => {
+    setShowFunction((prev) => !prev);
   };
 
-  const handleClickShowConfirmPassword = () => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
+//   const handleClickShowConfirmPassword = () => {
+//     setShowConfirmPassword(!showConfirmPassword);
+//   };
 
-  const handleSubmit = () => {
-    // Xử lý logic xác nhận mật khẩu
-    console.log('Mật khẩu mới:', password);
-    console.log('Xác nhận mật khẩu:', confirmPassword);
+  const handleSubmit = async () => {
+    if (newPassword !== confirmNewPassword) {
+      toast.error('Mật khẩu mới và xác nhận mật khẩu không khớp!');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await changePassword({
+        userId: UserID, 
+        currentPassword: currentPassword, // Hoặc current_password
+        newPassword: newPassword, 
+      });
+      console.log(res);
+      
+      toast.success(res.data.message || 'Đổi mật khẩu thành công!');
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmNewPassword('');
+    } catch (error) {
+      toast.error(
+        error.res?.data || 'Đổi mật khẩu thất bại. Vui lòng thử lại!'
+      );
+      console.error('Error:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -41,56 +74,76 @@ const UserChangePass = () => {
             Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác
         </Typography>
 
+        <TextField
+          label="Mật khẩu hiện tại"
+          type={showCurrentPassword ? 'text' : 'password'}
+          fullWidth
+          margin="normal"
+          variant="outlined"
+          value={currentPassword}
+          onChange={(e) => setCurrentPassword(e.target.value)}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={() => handleClickShowPassword(setShowCurrentPassword)}>
+                  {showCurrentPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+
         {/* Mật khẩu mới */}
         <TextField
-            label="Mật khẩu mới"
-            type={showPassword ? 'text' : 'password'}
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            InputProps={{
+          label="Mật khẩu mới"
+          type={showNewPassword ? 'text' : 'password'}
+          fullWidth
+          margin="normal"
+          variant="outlined"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+          InputProps={{
             endAdornment: (
-                <InputAdornment position="end">
-                <IconButton onClick={handleClickShowPassword}>
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
+              <InputAdornment position="end">
+                <IconButton onClick={() => handleClickShowPassword(setShowNewPassword)}>
+                  {showNewPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
-                </InputAdornment>
+              </InputAdornment>
             ),
-            }}
+          }}
         />
+
 
         {/* Xác nhận mật khẩu */}
         <TextField
             label="Xác nhận mật khẩu"
-            type={showConfirmPassword ? 'text' : 'password'}
+            type={showConfirmNewPassword ? 'text' : 'password'}
             fullWidth
             margin="normal"
             variant="outlined"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            value={confirmNewPassword} // Đúng tên biến state
+            onChange={(e) => setConfirmNewPassword(e.target.value)} // Đúng hàm cập nhật state
             InputProps={{
-            endAdornment: (
+                endAdornment: (
                 <InputAdornment position="end">
-                <IconButton onClick={handleClickShowConfirmPassword}>
-                    {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
+                    <IconButton onClick={() => handleClickShowPassword(setShowConfirmNewPassword)}>
+                    {showConfirmNewPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
                 </InputAdornment>
-            ),
+                ),
             }}
         />
 
         {/* Nút Xác Nhận */}
         <Button
-            variant="contained"
-            color="primary"
-            fullWidth
-            sx={{ mt: 2 }}
-            onClick={handleSubmit}
-            disabled={!password || !confirmPassword || password !== confirmPassword}
+          variant="contained"
+          color="primary"
+          fullWidth
+          sx={{ mt: 2 }}
+          onClick={handleSubmit}
+          disabled={!currentPassword || !newPassword || !confirmNewPassword || loading}
         >
-            Xác Nhận
+          {loading ? 'Đang xử lý...' : 'Xác Nhận'}
         </Button>
         </Box>
     </div>

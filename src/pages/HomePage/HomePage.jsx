@@ -16,6 +16,8 @@ function HomePage() {
     const [listProducts,setListProducts] = useState([]);
     
     useEffect(() => {
+     
+        
         getProducts().then( res =>{
             setListProducts(res.data)
          

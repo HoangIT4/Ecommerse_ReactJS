@@ -20,7 +20,10 @@ function CartForm() {
         boxEmpty,
         boxBtnEmpty,
     } = styles
+
     const { listProductCart, isLoading, setIsOpen } =useContext(SideBarContext);
+    console.log(listProductCart);
+    
     const navigate = useNavigate()
 
     const handleNavigateToShop = () => {

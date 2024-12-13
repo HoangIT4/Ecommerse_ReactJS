@@ -1,10 +1,12 @@
 import styles from '../../styles.module.scss';
 import { DeleteOutlined  } from '@ant-design/icons';
 import SelectBox from '@pages/CartDetail/component/SelectBox'
+import { HOST_BE} from '@/config/url'
 import LoadingCart from '@pages/CartDetail/component/LoadingCart';
 
-function CartTable({listProductCart, getData,isLoading, getDataDelete}) {
-
+function CartTable({listProductCart, getData,isLoading, getDataDelete}) {  
+    console.log(listProductCart);
+    
     const {cartTable} = styles
 
     const showOptions = [
@@ -51,16 +53,14 @@ function CartTable({listProductCart, getData,isLoading, getDataDelete}) {
                 </thead>
                 <tbody>
                     {listProductCart.map((item) => (
+                        
                         <tr key={item.cartID}>
                             <td className={styles.product}>
-                                <img src={item.preImg} alt={item.name} />
+                                <img src={item.preImg.startsWith("http") ? item.preImg : `${HOST_BE}${item.preImg}`} alt={item.name} />
                                 <div>
                                     <p style={{fontSize:'16px'}}>{item.name}</p>
                                 </div>
-                            </td>
-                            {/* <td>
-                                <DeleteOutlined style={{fontSize:'20px'}} onClick={()=>handleDelete(item.id)}/>
-                            </td> */}
+                            </td>          
                             <td>
                                 <DeleteOutlined 
                                     style={{fontSize:'20px', cursor: 'pointer'}} 
@@ -78,7 +78,7 @@ function CartTable({listProductCart, getData,isLoading, getDataDelete}) {
                                         getValueSelect(
                                             item.userID,
                                             item.productID,
-                                            e,// là số lượng ng dùng vừa click
+                                            e,
                                         )
                                     }
                                     type='show'

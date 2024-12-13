@@ -11,15 +11,20 @@ import {ToastContext} from '@/context/ToastProvider';
 import { HOST_BE} from '@/config/url'
 import {SideBarContext} from '@/context/SidebarProvider'
 import { addProductToCart } from '@/apis/cartService';
+import LoadingTextCommon from '@components/LoadingTextCommon/LoadingTextCommon';
 
-function ProductsItem({productID,src,preImg,name,formattedPrice}) {
+function ProductsItem({productID,src,preImg,name,formattedPrice,stock}) {
+    console.log(stock);
+    
+
     const {containerItem,boxImg,showImageWhenHover,showFncWhenHover,Icon,title,priceCls,ClickSpace} = styles
     const navigate = useNavigate();
     const UserID = Cookies.get('UserID')
+    const [isLoading, setIsLoading] = useState(false);
     // const [selectedProduct, setSelectedProduct] = useState(null);
     const {setIsOpen, setType, handleGetListProductCart} = useContext(SideBarContext);
-    const { toast } = useContext(ToastContext);
-
+    const { toast } = useContext(ToastContext); 
+    const [productStock, setProductStock] = useState(stock);
 
 
     const handleProductClick = (data) => {
@@ -35,32 +40,41 @@ function ProductsItem({productID,src,preImg,name,formattedPrice}) {
             toast.warning('Please login to add to cart')
 
             return; 
+
+          
         }
+        const quantityToAdd = 1; // Đây là số lượng bạn muốn thêm vào giỏ hàng, có thể thay đổi tùy vào logic giao diện
+  
+        if (quantityToAdd > productStock) {
+            toast.error(`You can only add up to ${productStock} items in stock.`);
+            return;
+          }
     
         const data ={
             userID: UserID,
             productID:productID,
-            quantity:1,
-            // Image:src,
-            // productName:name,
-            productPrice:formattedPrice
+            quantity: Math.min(quantityToAdd, productStock),
+            productPrice:formattedPrice,
     
         }
 
-
+        setIsLoading(true);
         addProductToCart(data)  
-            .then((res) => {       
+            .then((res) => {     
+                
                 setIsOpen(true);
                 setType('cart');
-                toast.success(res.message,{ autoClose:1000 })
+                setIsLoading(false);
+                toast.success(res.message,{ autoClose:1000 })            
                 handleGetListProductCart(UserID, 'cart');
+                setProductStock(productStock - quantityToAdd);
             })
             .catch((error) => {
                 toast.error(error.message)
             });
     }
 
-
+    
 
 
 

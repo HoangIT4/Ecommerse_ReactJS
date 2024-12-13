@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import searchImage from "@icons/svgs/search-icon.svg";
 import styles from "./styles.module.scss";
 import debounce from "lodash/debounce";
+import { HOST_BE } from "@/config/url";
 import {getProducts} from '@/apis/productsService';
 import { getProductById } from '@/apis/productsService';
 
@@ -198,7 +199,7 @@ const SearchBar = (props) => {
                 onClick={() => handleProductClick(product.id)}
               >
                 <img
-                  src={product.preImg}
+                  src={product.preImg.startsWith("http") ? product.preImg : `${HOST_BE}${product.preImg}`}
                   alt={product.name}
                   className={styles.productImage}
                 />

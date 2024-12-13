@@ -8,7 +8,8 @@ import {SideBarContext} from '@/context/SidebarProvider';
 import LoadingCart from '@pages/CartDetail/component/LoadingCart';
 import { DeleteOutlined  } from '@ant-design/icons';
 import SelectBox from '@pages/CartDetail/component/SelectBox'
-function YourOrder({ nextStep, formState, handleSubmit  }) {
+
+function YourOrder({ formState, handleSubmit}) {
     const {
         containerSummary,
         title,
@@ -67,7 +68,7 @@ function YourOrder({ nextStep, formState, handleSubmit  }) {
                     <div>{Total}đ</div>
                 </div>
 
-                <Button content={'PLACE ORDER'}  onClick={handleSubmit} />
+                <Button content={'PLACE ORDER'}  onClick={handleSubmit}  />
                 <div className={space} />
                 <Button content={'RETURN'} isPriamry={false} />
 

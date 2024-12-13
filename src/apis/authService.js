@@ -10,5 +10,7 @@ const signIn = async (body) =>{
 const getInfo = async (Id) =>{
     return await axiosClient.get(`/User/${Id}`);
 }
-
-export {register, signIn, getInfo}  
+const changePassword = async (body) =>{
+    return await axiosClient.post('/User/change-password',body)
+} 
+export {register, signIn, getInfo,changePassword}  

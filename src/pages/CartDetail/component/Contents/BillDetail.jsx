@@ -71,7 +71,7 @@ const styles = {
 const BillDetail = ({ formState, setFormState, handleSubmit }) => {
   // Xác thực với Yup
   const validationSchema = Yup.object({
-    fullName: Yup.string().required('Họ và Tên là bắt buộc'),
+    fullName: Yup.string().required('Họ và tên là bắt buộc'),
     email: Yup.string().email('Email không hợp lệ').required('Email là bắt buộc'),
     phoneNumber: Yup.string().required('Số điện thoại là bắt buộc'),
     address: Yup.string().required('Địa chỉ là bắt buộc'),
@@ -85,11 +85,12 @@ const BillDetail = ({ formState, setFormState, handleSubmit }) => {
     setFormState(values);
     handleSubmit();
   };
+
   return (
     <Formik
         initialValues={formState}
-        validationSchema={validationSchema}
-        onSubmit={handleFormSubmit}
+      validationSchema={validationSchema}
+      onSubmit={handleFormSubmit}
     >
       {({ handleSubmit, handleChange, values, errors, touched }) => (
         <form onSubmit={handleSubmit} style={styles.form}>

@@ -25,15 +25,17 @@ const CheckoutForm = () => {
     try {
       setIsLoading(true);
       const response = await createOrder(formState);
-      console.log('Đặt hàng thành công:', response);
+      console.log('Order placed successfully:', response);
       // Thực hiện các xử lý khác sau khi đặt hàng thành công
     } catch (err) {
       setError(err.message);
-      console.error('Lỗi khi đặt hàng:', err);
+      console.error('Error placing order:', err);
     } finally {
       setIsLoading(false);
     }
   };
+
+
   return (
       <div className={containerContents}>
       <BillDetail  
@@ -42,7 +44,11 @@ const CheckoutForm = () => {
         handleSubmit={handleSubmit}
 
       />
-      <YourOrder formState={formState} handleSubmit={handleSubmit} isLoading={isLoading} error={error} />
+      <YourOrder 
+        formState={formState}
+        handleSubmit={handleSubmit}
+        isLoading={isLoading}
+        error={error} />
     </div>
   );
 };
