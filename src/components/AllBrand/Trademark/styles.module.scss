@@ -1,0 +1,57 @@
+@use '@styles/variables.module.scss' as*;
+@use'@styles/mixins.module.scss' as*;
+
+.container{
+    
+   
+
+    .boxContent{
+        height: 350px;
+        border-radius: 20px;
+        background-color: #fff; 
+        
+
+        .picture{
+            width: 310px;
+            border-top-left-radius: 10px; 
+            border-bottom-left-radius: 10px;
+            overflow: hidden; 
+        }
+        .trademark{
+            display: flex;
+            flex-direction: row;
+            padding-left: 1.5px;
+            width: 100%;
+            height: 350px;
+            
+            
+            .verticallLine {
+                width: 1px;
+                height: 100%; 
+                background-color: #e1e1e1;
+                
+            }
+            .horizontalLine {
+                width: 100%;
+                height: 1px; 
+                background-color: #e1e1e1;
+            }
+            .brandsColume{
+                @include flex_box_custom(flex-start,space-between,0px);
+                flex-direction: column;
+                width: 176px;
+                max-height: 350px;
+            
+                
+                
+            }
+            
+          
+        }
+    }
+    
+}
+.title{
+    color: $another-color;
+}
+

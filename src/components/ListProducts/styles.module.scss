@@ -1,0 +1,30 @@
+@use '@styles/variables.module.scss' as*;
+@use'@styles/mixins.module.scss' as*;
+
+.container{
+    @include flex_box_custom(center,center, 80px);
+    margin-top: 30px;
+    flex-wrap: wrap;
+    height: auto;
+    
+}
+
+
+
+.containerList{
+    @include flex_box_custom(flex-start,center, 10px);
+    margin-right: 20px;
+    margin-left: 20px;
+    background-size: cover;
+    flex-wrap: wrap;    
+    
+}
+
+
+
+
+.productsName{
+    @include flex_box_custom(center,center,0px);
+    margin: 12px;
+    
+}

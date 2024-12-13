@@ -1,0 +1,17 @@
+@use '@styles/variables.module.scss' as*;
+@use'@styles/mixins.module.scss' as*;
+
+
+
+.popup{
+    @include flex_box_custom(center,center,0px);
+    position: absolute;
+    font-size: 14px;
+    background-color: #fff;
+    min-width: 130px;
+    padding: 10px 20px ;
+    top:80px;
+    z-index: 9999;
+    border-radius:10px;
+    cursor: pointer;
+}

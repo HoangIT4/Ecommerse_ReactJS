@@ -1,0 +1,241 @@
+import { useState,useEffect } from 'react';
+import { Col, Row } from 'antd';
+import { useParams } from 'react-router-dom';
+import { getProductById } from '@/apis/productsService';
+import { useNavigate } from 'react-router-dom';
+import styles from './productdetail.module.scss'
+import reloadIcon from '@icons/svgs/reload-icon.svg';
+import wlIcon from '@icons/svgs/wish-list.svg';
+import MainLayout from '@components/Layout/Layout';
+import { HOST_BE } from "@/config/url";
+import { FormControl } from 'react-bootstrap';
+import Cookies from 'js-cookie';
+import { useContext } from 'react';
+import {ToastContext} from '@/context/ToastProvider';
+import {SideBarContext} from '@/context/SidebarProvider'
+import { addProductToCart } from '@/apis/cartService';
+
+
+function  ProductDetail() {
+    const { productId} = useParams();
+    const navigate = useNavigate();
+
+    const UserID = Cookies.get('UserID')
+    const {setIsOpen, setType, handleGetListProductCart} = useContext(SideBarContext);
+    const { toast } = useContext(ToastContext);
+ 
+    const handleAddToCart = () => {
+        if (!UserID) {
+            setIsOpen(true);
+            setType("user");
+            toast.warning('Vui lòng đăng nhập để thêm vào giỏ hàng');
+            return; 
+        }
+    
+        // Đảm bảo số lượng không vượt quá số lượng tồn kho
+        if (quantity > productData.stock) {
+            toast.error(`Chỉ còn ${productData.stock} sản phẩm trong kho.`);
+            return;
+        }
+    
+        const data = {
+            userID: UserID,
+            productID: productData.productID,
+            quantity: quantity, // Đảm bảo số lượng chính xác được gửi
+            productPrice: formattedPrice
+        };
+    
+        addProductToCart(data)
+            .then((res) => {    
+          
+                setIsOpen(true);
+                setType('cart');
+                toast.success(res.message, { autoClose: 1000 });
+                handleGetListProductCart(UserID, 'cart');  // Làm mới giỏ hàng
+            })
+            .catch((error) => {
+                toast.error(error.message);
+            });
+    };
+
+
+    const {
+        leftContent,container,
+        mainContent,boxImg,
+        anotherPicture,
+        desciption,textContent,
+        nameProduct,quantityBox,
+        buttonStyle,quantityNumber
+        ,headlineOR,headline,
+        containerMiddleBox,
+        des,containerBoxIcon,circle,
+        DetailPro,title_detail,
+        DetailDes
+    } = styles;
+    const [quantity,setQuantity]= useState(1);
+    const [productData, setProductData] = useState(null);
+    console.log(productData);
+    
+
+    const handleIncrease = () => {
+        if (quantity < productData.stock) {
+            setQuantity(quantity + 1);
+        }
+    }
+    const handleDecrease = () => {
+      if (quantity > 1) {
+        setQuantity(quantity - 1);
+      }
+    };
+
+   
+    useEffect(() => {
+        const fetchProduct = async () => {
+            try {
+                const data = await getProductById(productId);
+                console.log(data);
+                
+                setProductData(data);
+            } catch (error) {
+                console.error('Failed to fetch product:', error);
+            }
+        };
+
+        fetchProduct();
+    }, [productId]);
+    
+      if (!productData) return <p>Loading...</p>;
+   
+
+    return ( 
+        <MainLayout>
+            <div>
+                <div className={container}>
+                    <div className={mainContent}>
+                        <div className={leftContent}>
+
+                            <div className={boxImg}>
+                                <div className={anotherPicture}>                         
+                                        <img src={productData.preImg.startsWith("http") ? productData.preImg : `${HOST_BE}${productData.preImg}`}  style={{width:'100px'}} alt="Secondary" />
+                                    
+                                </div>
+                                <div>
+                                <img src={productData.src.startsWith("http") ? productData.src : `${HOST_BE}${productData.src}`} style={{ width: '400px', border: '1px solid #e1e1e1', borderRadius: '20px' }} alt="Main" />
+                                </div>
+                        
+                        
+                            </div>
+                        </div>
+                        
+                        <div className={textContent}>  
+                            <div className={nameProduct} style={{marginBottom:'15px'}} >
+                            {productData.name}
+                            </div>  
+                            <div style={{fontSize:'18PX',color:'red'}} >{productData.formattedPrice} đ</div>    
+                            <div style={{fontSize:'18PX'}}>Brand: {productData.brands.brandName}</div>      
+                            <div className={desciption}>
+                                Description: {productData.description}
+                            </div>
+                        
+                            <div className={quantityBox}>
+                                <div className={quantityNumber}>
+                                <button type="button" className="quantity-btn" onClick={handleDecrease}  
+                                    style={{
+                                        border: 'none', // Bỏ viền
+                                        fontSize: '20px', // Tăng kích thước nút
+                                        backgroundColor: 'transparent', // Nền trong suốt
+                                        color: '#000', // Màu chữ ban đầu
+                                }}>
+                                    -
+                                </button>
+                                <FormControl
+                                    value={quantity}
+                                    onChange={(e) => {
+                                        const value = Number(e.target.value);
+                                        if (value <= stock && value > 0) {
+                                            setQuantity(value);
+                                        }
+                                    }}
+                                style={{ 
+                                    textAlign: 'center',
+                                    
+                                    border: 'none', // Bỏ viền cho ô input
+                                    boxShadow: 'none', // Bỏ bóng mờ mặc định của input
+                                    fontSize: '20px', // Cỡ chữ lớn hơn cho số lượng
+                                    maxWidth: '40px', // Đảm bảo phần nhập số lượng không quá lớn
+                                }}
+                                readOnly
+                                />
+                                <button type="button" className="quantity-btn" onClick={handleIncrease}
+                                style={{
+                                    border: 'none', // Bỏ viền
+                                    justifyContent:'center',
+                                    fontSize: '20px', // Tăng kích thước nút
+                                    backgroundColor: 'transparent', // Nền trong suốt
+                                    color: '#000', // Màu chữ ban đầu
+                                }}>
+                                    +
+                                </button>
+                                </div>
+                                <button type="button" className={buttonStyle} onClick={handleAddToCart}>ADD TO CART</button>
+                            </div>
+                            <div>Stock: {productData.stock}</div>
+                            <div className={headlineOR}>
+                                <div className={headline}></div>
+                                <div className={containerMiddleBox}>
+                                    <p className={des}>OR</p>
+                                </div>
+                                <div className={headline}></div>
+                            </div> 
+                            <button type="button" className={buttonStyle}>BUY NOW</button>
+                        
+                            <div className={containerBoxIcon} >
+                                <div className={circle}>
+                                    <img width={24} height={24} src={reloadIcon} alt="reloadIcon" 
+                                    style={{ 
+                                        filter: 'brightness(0) invert(0)' ,cursor:'pointer',
+                                        
+                                    }}
+                                    
+                                    />
+                                </div>
+                                <div className={circle}>
+                                    <img width={24} height={24} src={wlIcon} alt="wlIcon" style={{ filter: 'brightness(0) invert(0)',cursor:'pointer' }}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div className={DetailPro}>
+                    <div className={title_detail}>*DETAIL PRODUCT</div>
+                    <Row>
+                        <Col span={12}>
+                            <div style={{padding:'10px',fontFamily:'"Roboto Mono", monospace',fontSize:'18px'}}>Nhóm sản phẩm :</div>
+                            <div style={{padding:'10px',fontFamily:'"Roboto Mono", monospace',fontSize:'18px'}}>Dung tích khối lượng :</div>
+                            <div style={{padding:'10px',fontFamily:'"Roboto Mono", monospace',fontSize:'18px'}}>Xuất xứ :</div>
+                        </Col>
+                        <Col span={12}>
+                            <div style={{padding:'10px',fontFamily:'"Roboto Mono", monospace',fontSize:'18px'}}>{productData.categories?.[0]?.categoryName}</div>
+                            <div style={{padding:'10px',fontFamily:'"Roboto Mono", monospace',fontSize:'18px'}}>380g</div>
+                            <div style={{padding:'10px',fontFamily:'"Roboto Mono", monospace',fontSize:'18px'}}>Việt Nam</div>
+                        </Col>
+                    </Row>
+                    
+                </div>
+                <div className={DetailDes}>
+                    <div className={title_detail}>**DETAIL DESCRIPTON </div> 
+                        <div>
+                            Bí quyết của chuyên gia cho mái tóc được chăm sóc chuyên sâu ở salon luôn là thêm một bước kem ủ phục hồi. 
+                            Thông qua việc ủ tóc, mái tóc bạn cũng sẽ nhận được những chất dinh dưỡng cần thiết, phục hồi và trở nên suôn mượt hơn. 
+                            Tuy nhiên, thay vì phải ra salon thường xuyên mất nhiều thời gian và chi phí, TRESemmé đem lại cho bạn 
+                            bí quyết dưỡng tóc từ các chuyên gia tạo mẫu tóc trên thế giới, cho mái tóc của bạn đẹp chuẩn salon ngay tại nhà.
+                        </div>
+                    
+                </div>                   
+            </div>
+        </MainLayout>
+     );
+}
+
+export default  ProductDetail;

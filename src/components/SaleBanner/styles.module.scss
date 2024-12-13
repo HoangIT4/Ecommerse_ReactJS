@@ -1,0 +1,64 @@
+@use '@styles/variables.module.scss' as*;
+@use '@styles/mixins.module.scss' as*;
+
+.container {
+    @include flex_box_custom(center, center, 0px);
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    height: auto;
+    border-radius: 10px;
+    z-index: 9;
+    width: 100%;
+    background-clip: border-box;
+
+    &:hover .arrow {
+      opacity: 1; /* Hiển thị mũi tên */
+      transform: translateY(-50%) scale(1.1); /* Thêm hiệu ứng phóng to */
+  }
+
+    .arrow {
+        position: absolute;
+        top: 50%;
+        border: 1px solid blue;
+        padding: 5px;
+        border-radius: 20px;
+        color: $another-color;
+        transform: translateY(-50%);
+        z-index: 10;
+        opacity: 0; 
+        font-size: 24px; 
+        cursor: pointer;
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease;
+
+        // Hiển thị mũi tên khi hover vào container
+       &:hover{
+        opacity: 1; /* Hiển thị mũi tên */
+        background-color: $another-color;
+        color: white
+       }
+    }
+    
+    .next {
+        @include flex_box_custom(flex-start, center, 0px);
+        right: 10px;
+    }
+
+    .prev {
+        @include flex_box_custom(flex-start, center, 0px);
+        left: 10px;
+    }
+
+    .slick-dots {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: block; 
+  }
+  
+}
